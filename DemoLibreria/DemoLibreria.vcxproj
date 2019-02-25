@@ -93,6 +93,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <EntryPointSymbol>Main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,6 +126,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Act1DosAlta.cpp" />
+    <ClCompile Include="Act1DosMedia.cpp" />
+    <ClCompile Include="Act1UnoAlta.cpp" />
+    <ClCompile Include="Act1UnoMedia.cpp" />
+    <ClCompile Include="Etapas.cpp" />
+    <ClCompile Include="Inicio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Act1DosAlta.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Act1DosMedia.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Act1UnoAlta.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Act1UnoMedia.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Etapas.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Inicio.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Act1DosAlta.resx">
+      <DependentUpon>Act1DosAlta.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1DosMedia.resx">
+      <DependentUpon>Act1DosMedia.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1UnoAlta.resx">
+      <DependentUpon>Act1UnoAlta.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1UnoMedia.resx">
+      <DependentUpon>Act1UnoMedia.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Etapas.resx">
+      <DependentUpon>Etapas.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

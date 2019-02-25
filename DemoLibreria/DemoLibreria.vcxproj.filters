@@ -13,5 +13,98 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica">
+      <UniqueIdentifier>{70f3cd94-b89d-45f2-a843-9ed7b7c19e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica">
+      <UniqueIdentifier>{40be5d93-a821-43ad-9195-819d43a5ab82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\HabilidadUno">
+      <UniqueIdentifier>{789916e3-5a03-4b5a-ba95-4392d5090ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadMedia">
+      <UniqueIdentifier>{bb17c5ef-cb72-4669-a9fc-5161b1e76d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadBaja">
+      <UniqueIdentifier>{ffe0421b-58c9-4bdb-b0e3-b7f78337260b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadAlta">
+      <UniqueIdentifier>{295c1b4b-d324-4ca4-888f-e36abd03ba2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\HabilidadDos">
+      <UniqueIdentifier>{f3c1a7f9-304e-43cc-8797-d1bfe41c3993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\HabilidadUno">
+      <UniqueIdentifier>{9cb202fb-b14a-43bc-9f16-9c291e948f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\HabilidadDos">
+      <UniqueIdentifier>{e2597f2f-260c-408c-be43-3b9e3afeb7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\HabilidadUno\DificultadBaja">
+      <UniqueIdentifier>{c7fdb88b-ed8e-44d1-944f-5e8837e45832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\HabilidadUno\DificultadMedia">
+      <UniqueIdentifier>{8751cb84-8f20-4e75-abcb-e6251403bdbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\HabilidadUno\DificultadAlta">
+      <UniqueIdentifier>{fd1cd75d-662c-47a8-98c5-03c7f8c403a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inicio.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Etapas.h">
+      <Filter>Archivos de encabezado\InterfazGrafica</Filter>
+    </ClInclude>
+    <ClInclude Include="Act1UnoMedia.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Act1DosMedia.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadMedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Act1UnoAlta.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
+    </ClInclude>
+    <ClInclude Include="Act1DosAlta.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Inicio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Etapas.cpp">
+      <Filter>Archivos de origen\InterfazGrafica</Filter>
+    </ClCompile>
+    <ClCompile Include="Act1UnoMedia.cpp">
+      <Filter>Archivos de origen\InterfazGrafica\HabilidadUno\DificultadMedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Act1DosMedia.cpp">
+      <Filter>Archivos de origen\InterfazGrafica\HabilidadUno\DificultadMedia</Filter>
+    </ClCompile>
+    <ClCompile Include="Act1UnoAlta.cpp">
+      <Filter>Archivos de origen\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
+    </ClCompile>
+    <ClCompile Include="Act1DosAlta.cpp">
+      <Filter>Archivos de origen\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Inicio.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Etapas.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1UnoMedia.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1DosMedia.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1UnoAlta.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
