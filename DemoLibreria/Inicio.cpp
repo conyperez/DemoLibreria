@@ -1,5 +1,8 @@
 #include "Inicio.h"
 #include "Etapas.h"
+#include "Hecho.h"
+#include "Regla.h"
+#include "Argumento.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -69,7 +72,11 @@ System::Void DemoLibreria::Inicio::btnComenzar_Click(System::Object^  sender, Sy
 	this->usuario->setHabilidad("Habilidad_Uno");
 	this->usuario->setDificultad("Facil");
 	this->usuario->setNumero_actividad(2);
-	this->usuario->setNivel_actuacion("nivelActuacion(Alto):rangoActuacion(80-100),peso(50)");
+	vector<Hecho^> cuerpo_nivelActuacion;
+	cuerpo_nivelActuacion.push_back(gcnew Hecho("rangoActuacion", gcnew Argumento("80-100"), VERDADERO));
+	cuerpo_nivelActuacion.push_back(gcnew Hecho("peso", gcnew Argumento("50"), VERDADERO));
+
+	this->usuario->setReglaNivActuacion(gcnew Regla(gcnew Hecho("nivelActuacion", gcnew Argumento("Alto"), VERDADERO), cuerpo_nivelActuacion));
 
 	this->controlador = gcnew AgenteControlador(usuario, "Base_de_conocimiento/Base_de_Conocimiento.txt", "Usuario");
 

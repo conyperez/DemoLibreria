@@ -8,10 +8,10 @@ System::Void DemoLibreria::FormEstrella::button1_Click(System::Object^  sender, 
 
 System::Void DemoLibreria::FormEstrella::determinarFormHabilidad() {
 
-	if (habilidad == "Conciencia_fonologica") {
-		Etapas^ principal = gcnew Etapas(this);
+	if (habilidad == "Habilidad_Uno") {
+		gcnew Etapas(formActividad, usuario, controlador);
 	}
-	else if (habilidad == "Conciencia_alfabetica") {
+	else if (habilidad == "Habilidad_Uno") {
 		MessageBox::Show("Avanza a la Habilidad 2");
 	}
 }

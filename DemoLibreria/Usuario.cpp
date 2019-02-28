@@ -130,6 +130,17 @@ void Usuario::setHabilidad(String ^ _habilidad)
 	this->habilidad = _habilidad;
 }
 
+Regla ^ Usuario::getReglaNivActuacion()
+{
+	return this->regla_nivActuacion;
+}
+
+void Usuario::setReglaNivActuacion(Regla ^ regla)
+{
+	this->regla_nivActuacion = regla;
+	setNivel_actuacion(this->regla_nivActuacion->getCabeza()->getArgumento()->getNombreArgumento());
+}
+
 void Usuario::setDificultad(String ^ _dificultad)
 {
 	this->dificultad = _dificultad;

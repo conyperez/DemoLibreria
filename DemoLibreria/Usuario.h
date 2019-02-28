@@ -3,7 +3,7 @@
 #define USUARIO_H
 
 #include <cliext/vector>
-
+#include "Regla.h"
 using System::String;
 using cliext::vector;
 
@@ -29,6 +29,8 @@ public:
 	vector<String^> getDificultades();
 	vector<String^> getHistorialNivelActuacion();
 	void setHabilidad(String^ _habilidad);
+	Regla^ getReglaNivActuacion();
+	void setReglaNivActuacion(Regla^ regla);
 	void setDificultad(String^ _dificultad);
 	void setNumero_actividad(int _numActividad);
 	void setProblema(String^ _problema);
@@ -47,6 +49,7 @@ private:
 	bool actividad_hecha;
 	String^ problema;
 	String^ nivel_actuacion;
+	Regla^ regla_nivActuacion;
 	vector<String^> habilidades;
 	vector<String^> dificultades;
 	vector<String^> historialNivActuacion;

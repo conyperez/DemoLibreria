@@ -33,7 +33,7 @@ System::Void DemoLibreria::Act1UnoMedia::Act1UnoMedia_Deactivate(System::Object^
 
 System::Void DemoLibreria::Act1UnoMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	gcnew Etapas(this, usuario, controlador);
 }
 
 System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e)
@@ -70,10 +70,9 @@ System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender,
 	//Muestro el nivel de actuacion
 	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
 
-	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad);
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, usuario, controlador);
 	form_estrella->ShowDialog();
 
-	gcnew Act1DosMedia(this);
 }
 
 System::Void DemoLibreria::Act1UnoMedia::inicializarPosicion()
