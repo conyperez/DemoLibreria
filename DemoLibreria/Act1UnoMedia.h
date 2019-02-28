@@ -1,5 +1,10 @@
 #pragma once
 
+#define ARRAY_SIZE 5
+
+#include "Usuario.h"
+#include "AgenteControlador.h"
+
 namespace DemoLibreria {
 
 	using namespace System;
@@ -12,12 +17,23 @@ namespace DemoLibreria {
 	/// <summary>
 	/// Resumen de Act1UnoMedia
 	/// </summary>
-	public ref class Act1UnoMedia : public System::Windows::Forms::Form
+	ref class Act1UnoMedia : public System::Windows::Forms::Form
 	{
 	public:
 		Act1UnoMedia(Form^ formAnterior)
 		{
 			this->formAnterior = formAnterior;
+			InitializeComponent();
+			inicializarPosicion();
+			this->Size = System::Drawing::Size(1050, 598);
+			this->Show();
+		}
+
+		Act1UnoMedia(Form^ formAnterior, Usuario^ _usuario, AgenteControlador^ _controlador)
+		{
+			this->formAnterior = formAnterior;
+			this->usuario = _usuario;
+			this->controlador = _controlador;
 			InitializeComponent();
 			inicializarPosicion();
 			this->Size = System::Drawing::Size(1050, 598);
@@ -63,9 +79,9 @@ namespace DemoLibreria {
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
+		Usuario^ usuario;
+		AgenteControlador^ controlador;
+		array<String^>^ respuestas = gcnew array<String^>(ARRAY_SIZE);
 
 
 #pragma region Windows Form Designer generated code
@@ -376,29 +392,29 @@ namespace DemoLibreria {
 
 		}
 #pragma endregion
-		private: System::Void inicializarPosicion();
-		private: System::Void comprobarActividadCompletada();
-		private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1UnoMedia_Load(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1UnoMedia_Activated(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1UnoMedia_Deactivate(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void btnListo_Click(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void moverBoton(System::Windows::Forms::Button^ boton);
-		private: System::Void bolsaUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCinco_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCinco_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void bolsaCinco_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void inicializarPosicion();
+	private: System::Void comprobarActividadCompletada();
+	private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1UnoMedia_Load(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1UnoMedia_Activated(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1UnoMedia_Deactivate(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnListo_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void moverBoton(System::Windows::Forms::Button^ boton);
+	private: System::Void bolsaUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCinco_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCinco_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void bolsaCinco_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 	};
 }

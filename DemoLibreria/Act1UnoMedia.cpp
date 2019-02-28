@@ -1,6 +1,7 @@
 #include "Act1UnoMedia.h"
 #include "Act1DosMedia.h"
 #include "Etapas.h"
+#include "FormEstrella.h"
 
 System::Void DemoLibreria::Act1UnoMedia::timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -30,13 +31,48 @@ System::Void DemoLibreria::Act1UnoMedia::Act1UnoMedia_Deactivate(System::Object^
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	gcnew Etapas(this);
 }
 
-System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	//Paso los datos del array a un vector	
+	vector<String^> vectRespuestas;
+	for (int i = 0; i < this->respuestas->Length; i++)
+	{
+		vectRespuestas.push_back(respuestas[i]);
+	}
+
+	delete respuestas;
+
+	controlador->evaluarActividad("Habilidad_Uno", "Medio", 1, vectRespuestas);
+
+	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
+
+	controlador->determinarNivelDeActuacion();
+
+	int cantidad;
+	if (controlador->getUsuario()->getNivel_actuacion() == "Alto")
+	{
+		cantidad = 3;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Medio")
+	{
+		cantidad = 2;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Bajo")
+	{
+		cantidad = 1;
+	}
+
+	//Muestro el nivel de actuacion
+	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
+
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad);
+	form_estrella->ShowDialog();
+
 	gcnew Act1DosMedia(this);
 }
 
@@ -70,42 +106,42 @@ System::Void DemoLibreria::Act1UnoMedia::moverBoton(System::Windows::Forms::Butt
 	this->posActBtnY = boton->Location.Y;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseBtnX = e->Location.X;
 	this->posMouseBtnY = e->Location.Y;
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseBtnX = e->Location.X;
 	this->posMouseBtnY = e->Location.Y;
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseBtnX = e->Location.X;
 	this->posMouseBtnY = e->Location.Y;
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseBtnX = e->Location.X;
 	this->posMouseBtnY = e->Location.Y;
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseBtnX = e->Location.X;
 	this->posMouseBtnY = e->Location.Y;
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -115,7 +151,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseMove(System::Object^  sen
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -125,7 +161,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseMove(System::Object^  sen
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -135,7 +171,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseMove(System::Object^  se
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -145,7 +181,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseMove(System::Object^  
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -155,25 +191,27 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseMove(System::Object^  s
 	}
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->bolsaUno->Location.X;
 	int y = this->bolsaUno->Location.Y;
 
-	if (x > this->panelCajaRoja->Location.X && x < this->panelCajaRoja->Location.X + this->panelCajaRoja->Size.Width && 
-		y > this->panelCajaRoja->Location.Y && y < this->panelCajaRoja->Location.Y + this->panelCajaRoja->Size.Height) 
+	if (x > this->panelCajaRoja->Location.X && x < this->panelCajaRoja->Location.X + this->panelCajaRoja->Size.Width &&
+		y > this->panelCajaRoja->Location.Y && y < this->panelCajaRoja->Location.Y + this->panelCajaRoja->Size.Height)
 	{
 		this->bolsaUno->Visible = false;
 		this->listoBtnUno = true;
 		this->bolsaUnoCaja = 1;
+		this->respuestas[0] = "B1_CR";
 	}
-	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width && 
-			 y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height) 
+	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width &&
+		y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height)
 	{
 		this->bolsaUno->Visible = false;
 		this->listoBtnUno = true;
 		this->bolsaUnoCaja = 2;
+		this->respuestas[0] = "B1_CA";
 	}
 	else {
 		this->bolsaUno->Location = System::Drawing::Point(this->xBolsaUno, this->yBolsaUno);
@@ -182,7 +220,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaUno_MouseUp(System::Object^  sende
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->bolsaDos->Location.X;
@@ -194,6 +232,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseUp(System::Object^  sende
 		this->bolsaDos->Visible = false;
 		this->listoBtnDos = true;
 		this->bolsaDosCaja = 1;
+		this->respuestas[1] = "B2_CR";
 	}
 	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width &&
 		y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height)
@@ -201,6 +240,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseUp(System::Object^  sende
 		this->bolsaDos->Visible = false;
 		this->listoBtnDos = true;
 		this->bolsaDosCaja = 2;
+		this->respuestas[1] = "B2_CA";
 	}
 	else {
 		this->bolsaDos->Location = System::Drawing::Point(this->xBolsaDos, this->yBolsaDos);
@@ -209,7 +249,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaDos_MouseUp(System::Object^  sende
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->bolsaTres->Location.X;
@@ -221,6 +261,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseUp(System::Object^  send
 		this->bolsaTres->Visible = false;
 		this->listoBtnTres = true;
 		this->bolsaTresCaja = 1;
+		this->respuestas[2] = "B3_CR";
 	}
 	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width &&
 		y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height)
@@ -228,6 +269,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseUp(System::Object^  send
 		this->bolsaTres->Visible = false;
 		this->listoBtnTres = true;
 		this->bolsaTresCaja = 2;
+		this->respuestas[2] = "B3_CA";
 	}
 	else {
 		this->bolsaTres->Location = System::Drawing::Point(this->xBolsaTres, this->yBolsaTres);
@@ -236,7 +278,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaTres_MouseUp(System::Object^  send
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->bolsaCuatro->Location.X;
@@ -248,6 +290,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseUp(System::Object^  se
 		this->bolsaCuatro->Visible = false;
 		this->listoBtnCuatro = true;
 		this->bolsaCuatroCaja = 1;
+		this->respuestas[3] = "B4_CR";
 	}
 	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width &&
 		y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height)
@@ -255,6 +298,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCuatro_MouseUp(System::Object^  se
 		this->bolsaCuatro->Visible = false;
 		this->listoBtnCuatro = true;
 		this->bolsaCuatroCaja = 2;
+		this->respuestas[3] = "B4_CA";
 	}
 	else {
 		this->bolsaCuatro->Location = System::Drawing::Point(this->xBolsaCuatro, this->yBolsaCuatro);
@@ -275,6 +319,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseUp(System::Object^  sen
 		this->bolsaCinco->Visible = false;
 		this->listoBtnCinco = true;
 		this->bolsaCincoCaja = 1;
+		this->respuestas[4] = "B5_CR";
 	}
 	else if (x > this->panelCajaAzul->Location.X && x < this->panelCajaAzul->Location.X + this->panelCajaAzul->Size.Width &&
 		y > this->panelCajaAzul->Location.Y && y < this->panelCajaAzul->Location.Y + this->panelCajaAzul->Size.Height)
@@ -282,6 +327,7 @@ System::Void DemoLibreria::Act1UnoMedia::bolsaCinco_MouseUp(System::Object^  sen
 		this->bolsaCinco->Visible = false;
 		this->listoBtnCinco = true;
 		this->bolsaCincoCaja = 2;
+		this->respuestas[4] = "B5_CA";
 	}
 	else {
 		this->bolsaCinco->Location = System::Drawing::Point(this->xBolsaCinco, this->yBolsaCinco);

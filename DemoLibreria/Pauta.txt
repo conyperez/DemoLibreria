@@ -1,0 +1,1 @@
+﻿Habilidad_Uno,Medio,1,(B1_CA B2_BR B3_CA B4_CR B5_CA)

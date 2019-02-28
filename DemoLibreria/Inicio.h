@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Usuario.h"
+#include "AgenteControlador.h"
+
 namespace DemoLibreria {
 
 	using namespace System;
@@ -17,6 +20,8 @@ namespace DemoLibreria {
 	public:
 		Inicio(void)
 		{
+			this->usuario = gcnew Usuario();
+
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
@@ -39,10 +44,11 @@ namespace DemoLibreria {
 	private: System::Windows::Forms::Timer^  timerPantalla;
 	private: System::ComponentModel::IContainer^  components;
 
+
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
+		Usuario^ usuario;
+		AgenteControlador^ controlador;
+
 
 
 #pragma region Windows Form Designer generated code
@@ -98,10 +104,10 @@ namespace DemoLibreria {
 
 		}
 #pragma endregion
-		private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void btnComenzar_Click(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Inicio_Load(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Inicio_Activated(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Inicio_Deactivate(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnComenzar_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Inicio_Load(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Inicio_Activated(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Inicio_Deactivate(System::Object^  sender, System::EventArgs^  e);
 	};
 }

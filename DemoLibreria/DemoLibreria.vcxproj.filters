@@ -49,6 +49,30 @@
     <Filter Include="Archivos de origen\InterfazGrafica\HabilidadUno\DificultadAlta">
       <UniqueIdentifier>{fd1cd75d-662c-47a8-98c5-03c7f8c403a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\Libreria">
+      <UniqueIdentifier>{cbe1f5dc-9b5d-4bd9-9475-24b9f25fbbe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Libreria">
+      <UniqueIdentifier>{150b941e-8b31-480a-8918-0470666e7684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Libreria\Agentes">
+      <UniqueIdentifier>{bb8a6d74-e2c3-4c88-82dc-7259b7a35e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\Libreria\Agentes">
+      <UniqueIdentifier>{3a6c7f94-6520-465e-9c5e-51d54d14a4ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto">
+      <UniqueIdentifier>{c30a0afd-7965-46b4-bea4-e81f3c27234a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Libreria\SistemaExperto">
+      <UniqueIdentifier>{2a4fe3f4-f894-432f-8bed-6e69359de530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\InterfazGrafica\Ventanas Emergentes">
+      <UniqueIdentifier>{fa8a25d4-e4e2-4bba-a6ce-2c160d4eafd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\InterfazGrafica\Ventanas Emergentes">
+      <UniqueIdentifier>{4c275f7b-6555-4552-bd56-435988d87f24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inicio.h">
@@ -68,6 +92,54 @@
     </ClInclude>
     <ClInclude Include="Act1DosAlta.h">
       <Filter>Archivos de encabezado\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
+    </ClInclude>
+    <ClInclude Include="Conector.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria</Filter>
+    </ClInclude>
+    <ClInclude Include="Evaluador.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria</Filter>
+    </ClInclude>
+    <ClInclude Include="LeerArchivo.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria</Filter>
+    </ClInclude>
+    <ClInclude Include="Usuario.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria</Filter>
+    </ClInclude>
+    <ClInclude Include="Argumento.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseDeConocimiento.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseDeHechos.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="Hecho.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorDeInferencia.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="Regla.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Sistema Experto</Filter>
+    </ClInclude>
+    <ClInclude Include="AgenteAprendizaje.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Agentes</Filter>
+    </ClInclude>
+    <ClInclude Include="AgenteAprendizajeAbstract.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Agentes</Filter>
+    </ClInclude>
+    <ClInclude Include="AgenteControlador.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Agentes</Filter>
+    </ClInclude>
+    <ClInclude Include="AgenteControladorAbs.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Agentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Percepciones.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Libreria\Agentes</Filter>
+    </ClInclude>
+    <ClInclude Include="FormEstrella.h">
+      <Filter>Archivos de encabezado\InterfazGrafica\Ventanas Emergentes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +161,48 @@
     <ClCompile Include="Act1DosAlta.cpp">
       <Filter>Archivos de origen\InterfazGrafica\HabilidadUno\DificultadAlta</Filter>
     </ClCompile>
+    <ClCompile Include="Conector.cpp">
+      <Filter>Archivos de origen\Libreria</Filter>
+    </ClCompile>
+    <ClCompile Include="Evaluador.cpp">
+      <Filter>Archivos de origen\Libreria</Filter>
+    </ClCompile>
+    <ClCompile Include="LeerArchivo.cpp">
+      <Filter>Archivos de origen\Libreria</Filter>
+    </ClCompile>
+    <ClCompile Include="Usuario.cpp">
+      <Filter>Archivos de origen\Libreria</Filter>
+    </ClCompile>
+    <ClCompile Include="Argumento.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseDeConocimiento.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseDeHechos.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="Hecho.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="MotorDeInferencia.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="Regla.cpp">
+      <Filter>Archivos de origen\Libreria\SistemaExperto</Filter>
+    </ClCompile>
+    <ClCompile Include="AgenteAprendizaje.cpp">
+      <Filter>Archivos de origen\Libreria\Agentes</Filter>
+    </ClCompile>
+    <ClCompile Include="AgenteControlador.cpp">
+      <Filter>Archivos de origen\Libreria\Agentes</Filter>
+    </ClCompile>
+    <ClCompile Include="Percepciones.cpp">
+      <Filter>Archivos de origen\Libreria\Agentes</Filter>
+    </ClCompile>
+    <ClCompile Include="FormEstrella.cpp">
+      <Filter>Archivos de origen\InterfazGrafica\Ventanas Emergentes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inicio.resx">
@@ -104,6 +218,9 @@
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Act1UnoAlta.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Act1DosAlta.resx">
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
   </ItemGroup>
