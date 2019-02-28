@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Usuario.h"
+#include "AgenteControlador.h"
+
 namespace DemoLibreria {
 
 	using namespace System;
@@ -23,6 +26,16 @@ namespace DemoLibreria {
 			this->Show();
 		}
 
+		Act1UnoAlta(Form^ formAnterior, Usuario^ usuario, AgenteControlador^ controlador)
+		{
+			this->formAnterior = formAnterior;
+			this->usuario = usuario;
+			this->controlador = controlador;
+			InitializeComponent();
+			this->Size = System::Drawing::Size(1050, 598);
+			this->Show();
+		}
+
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
@@ -34,6 +47,8 @@ namespace DemoLibreria {
 				delete components;
 			}
 		}
+	private: Usuario^ usuario;
+	private: AgenteControlador^ controlador;
 	private: bool marcaUno1 = false, marcaUno2 = false, marcaUno3 = false;
 	private: bool marcaDos1 = false, marcaDos2 = false, marcaDos3 = false;
 	private: bool marcaTres1 = false, marcaTres2 = false, marcaTres3 = false;

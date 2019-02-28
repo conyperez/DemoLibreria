@@ -33,7 +33,7 @@ System::Void DemoLibreria::Act1UnoMedia::Act1UnoMedia_Deactivate(System::Object^
 
 System::Void DemoLibreria::Act1UnoMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	gcnew Etapas(this, this->usuario, this->controlador);
 }
 
 System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e)
