@@ -67,6 +67,8 @@ System::Void DemoLibreria::Act1DosAlta::btnListo_Click(System::Object^  sender, 
 		cantidad = 1;
 	}
 
+	usuario->setHizo_actividad(true);
+
 	//Muestro el nivel de actuacion
 	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
 
