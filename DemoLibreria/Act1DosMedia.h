@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Usuario.h"
+#include "AgenteControlador.h"
+
 namespace DemoLibreria {
 
 	using namespace System;
@@ -12,12 +15,23 @@ namespace DemoLibreria {
 	/// <summary>
 	/// Resumen de Act1DosMedia
 	/// </summary>
-	public ref class Act1DosMedia : public System::Windows::Forms::Form
+	ref class Act1DosMedia : public System::Windows::Forms::Form
 	{
 	public:
 		Act1DosMedia(Form^ formAnterior)
 		{
 			this->formAnterior = formAnterior;
+			InitializeComponent();
+			inicializarPosicion();
+			this->Size = System::Drawing::Size(1050, 598);
+			this->Show();
+		}
+
+		Act1DosMedia(Form^ formAnterior, Usuario^ _usuario, AgenteControlador^ _controlador)
+		{
+			this->formAnterior = formAnterior;
+			this->usuario = _usuario;
+			this->controlador = _controlador;
 			InitializeComponent();
 			inicializarPosicion();
 			this->Size = System::Drawing::Size(1050, 598);
@@ -61,9 +75,8 @@ namespace DemoLibreria {
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
+		Usuario^ usuario;
+		AgenteControlador^ controlador;
 
 
 #pragma region Windows Form Designer generated code
@@ -322,26 +335,26 @@ namespace DemoLibreria {
 
 		}
 #pragma endregion
-		private: System::Void inicializarPosicion();
-		private: System::Void comprobarActividadCompletada();
-		private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1DosMedia_Load(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1DosMedia_Activated(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void Act1DosMedia_Deactivate(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void btnListo_Click(System::Object^  sender, System::EventArgs^  e);
-		private: System::Void moverBoton(System::Windows::Forms::Button^ boton);
-		private: System::Void btnUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-		private: System::Void btnCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void inicializarPosicion();
+	private: System::Void comprobarActividadCompletada();
+	private: System::Void timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1DosMedia_Load(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1DosMedia_Activated(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void Act1DosMedia_Deactivate(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void btnListo_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void moverBoton(System::Windows::Forms::Button^ boton);
+	private: System::Void btnUno_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnDos_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnTres_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnCuatro_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+	private: System::Void btnCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 	};
 }

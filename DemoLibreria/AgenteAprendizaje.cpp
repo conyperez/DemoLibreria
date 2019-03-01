@@ -49,7 +49,7 @@ void AgenteAprendizaje::obtenerNivelActuacionDificultad()
 	String ^ argumentoLogro = conector->ejecutarMotorInferencia("valorLogro", 1);
 
 	double valorLogro = System::Convert::ToDouble(argumentoLogro);
-	
+
 
 	// Obtener valor dificultad
 	conector->agregarHecho(gcnew Hecho("dificultad", gcnew Argumento(percepciones->getDificultad()), VERDADERO));
@@ -231,6 +231,11 @@ void AgenteAprendizaje::determinarProgresoMedio()
 			percepciones->setTotalActuacion("Medio_Alto");
 		}
 	}
+}
+
+Regla ^ AgenteAprendizaje::getActuacionObtenida()
+{
+	return reglaNivelActuacion;
 }
 
 /*

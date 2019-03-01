@@ -1,6 +1,6 @@
 #include "AgenteControlador.h"
 
-AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo,String^ nombre_usuario)
+AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo, String^ nombre_usuario)
 {
 	usuario = _usuario;
 	direccion = _nombreArchivo;
@@ -82,12 +82,12 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 
 						return actividad;
 					}
-					else 
+					else
 					{
 						if (usuario->getNum_actividad() == usuario->getTotal_actividades())
 						{
 							//Busco la habilidad sgte
-							for (int i = 0; i < usuario->getHabilidades().size();i++)
+							for (int i = 0; i < usuario->getHabilidades().size(); i++)
 							{
 								if (usuario->getHabilidad() == usuario->getHabilidades()[i])
 								{
@@ -176,7 +176,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 						if (usuario->getNum_actividad() == 1)
 						{
 							//Busco la habilidad anterior
-							for (int i = 0; i < usuario->getHabilidades().size();i++)
+							for (int i = 0; i < usuario->getHabilidades().size(); i++)
 							{
 								if (usuario->getHabilidad() == usuario->getHabilidades()[i])
 								{
@@ -702,8 +702,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 	}
 	else
 	{
-		String^ tmpRegla = usuario->getNivel_actuacion();
-		Regla^ reglaNivActuacion = conector->transformarString_A_Regla(tmpRegla);
+		Regla^ reglaNivActuacion = usuario->getReglaNivActuacion();
 
 		BaseDeHechos^ base_de_hechos = conector->obtenerBaseDeHechos();
 		BaseDeConocimiento^ base_de_conocimiento = conector->obtenerBaseDeConocimiento();
@@ -804,34 +803,155 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 						}
 					}
 				}
-				else
+				else if (usuario->getNivel_actuacion() == "Alto") //Avanza dificultad pero sigue en la misma habilidad
 				{
-					//Busco la actividad sgte
-					int actividad_sgte;
-					if (usuario->getNum_actividad() == usuario->getTotal_actividades() ||
-						usuario->getDificultad() != resultado->getArgumento()->getNombreArgumento()) //Llego a la ultima actividad o cambio dif
+					String^ dificultad_sgte = usuario->getDificultad();
+					String^ habilidad_sgte = usuario->getHabilidad();
+					int actividad_sgte = usuario->getNum_actividad();
+
+					if (usuario->getNum_actividad() == usuario->getTotal_actividades())
 					{
-						actividad_sgte = 1;
-					}
-					else
-					{
-						for (int i = 1; i < usuario->getTotal_actividades(); i++)
+						//avanzo una dificultad
+						for (int i = 0; i < usuario->getDificultades().size(); i++)
 						{
-							if (usuario->getNum_actividad() == i)
+							if (usuario->getDificultad() == usuario->getDificultades()[i])
 							{
-								actividad_sgte = i + 1;
+								dificultad_sgte = usuario->getDificultades()[i + 1];
 								break;
 							}
 						}
+
+						actividad_sgte = 1;
+
+					}
+					else
+					{
+						//Avanzo 2 actividades
+						if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) > 2)
+						{
+							actividad_sgte = usuario->getNum_actividad() + 2;
+						}
+						//Avanzo a la dificultad sgte en actividad 1
+						else if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) < 2)
+						{
+							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							{
+								if (usuario->getDificultad() == usuario->getDificultades()[i])
+								{
+									dificultad_sgte = usuario->getDificultades()[i + 1];
+									break;
+								}
+							}
+							actividad_sgte = 1;
+						}
+						//Avanzo a la habilidad sgte en la primera dificultad y en la actividad 1
+						else
+						{
+							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							{
+								if (usuario->getDificultad() == usuario->getDificultades()[i])
+								{
+									dificultad_sgte = usuario->getDificultades()[i + 1];
+									break;
+								}
+							}
+							dificultad_sgte = usuario->getDificultades()[0];
+							actividad_sgte = 1;
+						}
 					}
 
-					actividad.push_back(usuario->getHabilidad());
-					actividad.push_back(resultado->getArgumento()->getNombreArgumento());
-					actividad.push_back(actividad_sgte.ToString());
+					usuario->setDificultad(dificultad_sgte);
+					usuario->setNumero_actividad(actividad_sgte);
 
 					percepciones->setHabilidad(usuario->getHabilidad());
-					percepciones->setDificultad(resultado->getArgumento()->getNombreArgumento());
+					percepciones->setDificultad(dificultad_sgte);
 					percepciones->setNumeroActividad(actividad_sgte);
+
+					actividad.push_back(usuario->getHabilidad());
+					actividad.push_back(dificultad_sgte);
+					actividad.push_back(actividad_sgte.ToString());
+
+					conector->borrarHechos();
+
+					delete motorInferencia;
+					delete base_de_conocimiento;
+					delete base_de_hechos;
+
+					return actividad;
+				}
+				else if (usuario->getNivel_actuacion() == "Medio") //si mantiene su nivel de actuacion, repite la actividad o avanza a la siguiente actividad
+				{
+
+					int actividad_sgte = usuario->getNum_actividad();
+					if (usuario->getNum_actividad() != usuario->getTotal_actividades())
+					{
+						actividad_sgte += 1;
+					}
+
+					usuario->setNumero_actividad(actividad_sgte);
+
+					percepciones->setHabilidad(usuario->getHabilidad());
+					percepciones->setDificultad(usuario->getDificultad());
+					percepciones->setNumeroActividad(actividad_sgte);
+
+					actividad.push_back(usuario->getHabilidad());
+					actividad.push_back(usuario->getDificultad());
+					actividad.push_back(actividad_sgte.ToString());
+
+					conector->borrarHechos();
+
+					delete motorInferencia;
+					delete base_de_conocimiento;
+					delete base_de_hechos;
+
+					return actividad;
+				}
+				else if (usuario->getNivel_actuacion() == "Bajo")
+				{
+					int actividad_sgte = usuario->getNum_actividad();
+					String^ dificultad_sgte = usuario->getDificultad();
+					String^ habilidad_stge = usuario->getHabilidad();
+
+					if (usuario->getNum_actividad() == 1)
+					{
+						if (usuario->getDificultad() == usuario->getDificultades()[0]) {
+							if (usuario->getHabilidad() != usuario->getHabilidades()[0])
+							{
+								dificultad_sgte = usuario->getDificultades()[usuario->getDificultades().size()];
+								actividad_sgte = usuario->getTotal_actividades();
+							}
+						}
+						else
+						{
+							//Baja una dificultad
+							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							{
+								if (usuario->getDificultad() == usuario->getDificultades()[i])
+								{
+									dificultad_sgte = usuario->getDificultades()[i - 1];
+									break;
+								}
+							}
+							//se pone en la ultima actividad de esa dificultad
+							actividad_sgte = usuario->getTotal_actividades();
+						}
+					}
+					else //retrocede una actividad
+					{
+						actividad_sgte = usuario->getNum_actividad() - 1;
+					}
+
+					usuario->setNumero_actividad(actividad_sgte);
+					usuario->setHabilidad(dificultad_sgte);
+					usuario->setDificultad(habilidad_stge);
+
+					percepciones->setHabilidad(habilidad_stge);
+					percepciones->setDificultad(dificultad_sgte);
+					percepciones->setNumeroActividad(actividad_sgte);
+
+					actividad.push_back(habilidad_stge);
+					actividad.push_back(dificultad_sgte);
+					actividad.push_back(actividad_sgte.ToString());
 
 					conector->borrarHechos();
 
@@ -846,14 +966,14 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 			{
 				String^ tmpRegla = usuario->getProblema();
 				Regla^ reglaProblema = conector->transformarString_A_Regla(tmpRegla);
-				
+
 				if (reglaProblema->getCabeza()->getArgumento()->getNombreArgumento() == "Siguiente_Habilidad")
 				{
 					if (usuario->getHistorialNivelActuacion().size() == 0)
 					{
 						//repite la primera actividad de la ultima dificultad
 						actividad.push_back(usuario->getHabilidad());
-						actividad.push_back(usuario->getDificultades()[usuario->getDificultades().size() -1]);
+						actividad.push_back(usuario->getDificultades()[usuario->getDificultades().size() - 1]);
 						actividad.push_back("1");
 
 						percepciones->setHabilidad(usuario->getHabilidad());
@@ -875,11 +995,11 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 						}
 						else
 						{
-							for (int pos = 0; pos < usuario->getHabilidades().size() -1;pos++)
+							for (int pos = 0; pos < usuario->getHabilidades().size() - 1; pos++)
 							{
 								if (usuario->getHabilidad() == usuario->getHabilidades()[pos])
 								{
-									hab_sgte= usuario->getHabilidades()[pos + 1];
+									hab_sgte = usuario->getHabilidades()[pos + 1];
 								}
 							}
 						}
@@ -1014,7 +1134,7 @@ void AgenteControlador::determinarNivelDeActuacion()
 	if (percepciones->getProblemaGenerado() == nullptr)
 	{
 		actuacion = percepciones->getNivelDeActuacion();
-		usuario->setNivel_actuacion(percepciones->getNivelDeActuacion());
+		usuario->setReglaNivActuacion(aprendizaje->getActuacionObtenida());
 	}
 	else
 	{

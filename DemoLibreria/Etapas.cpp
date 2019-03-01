@@ -33,7 +33,6 @@ System::Void DemoLibreria::Etapas::Etapas_Load(System::Object^  sender, System::
 		this->btnHabilidadUno->Enabled = true;
 		this->btnHabilidadUnoN->Enabled = true;
 
-
 	}
 	else if (actividad_asignada[0] == "Habilidad_Dos")
 	{
@@ -82,7 +81,7 @@ System::Void DemoLibreria::Etapas::btnHabilidadUno_Click(System::Object^  sender
 		}
 		else
 		{
-			gcnew Act1DosMedia(this);
+			gcnew Act1DosMedia(this, usuario, controlador);
 		}
 	}
 	else //dificultad Baja
