@@ -1,7 +1,10 @@
 #pragma once
 
+#define ARRAY_SIZE 5
+
 #include "Usuario.h"
 #include "AgenteControlador.h"
+#include "FormEstrella.h"
 
 namespace DemoLibreria {
 
@@ -77,6 +80,7 @@ namespace DemoLibreria {
 	private:
 		Usuario^ usuario;
 		AgenteControlador^ controlador;
+		array<String^>^ respuestas = gcnew array<String^>(ARRAY_SIZE);
 
 
 #pragma region Windows Form Designer generated code
@@ -125,8 +129,9 @@ namespace DemoLibreria {
 			this->panelCentro->Controls->Add(this->panel1);
 			this->panelCentro->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panelCentro->Location = System::Drawing::Point(0, 0);
+			this->panelCentro->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelCentro->Name = L"panelCentro";
-			this->panelCentro->Size = System::Drawing::Size(2386, 1228);
+			this->panelCentro->Size = System::Drawing::Size(687, 395);
 			this->panelCentro->TabIndex = 0;
 			// 
 			// panel1
@@ -146,9 +151,10 @@ namespace DemoLibreria {
 			this->panel1->Controls->Add(this->panelPuestoDos);
 			this->panel1->Controls->Add(this->panelPuestoUno);
 			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(28, 0);
+			this->panel1->Location = System::Drawing::Point(12, 0);
+			this->panel1->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(2346, 1153);
+			this->panel1->Size = System::Drawing::Size(1005, 517);
 			this->panel1->TabIndex = 8;
 			// 
 			// panelInstruccion
@@ -158,9 +164,10 @@ namespace DemoLibreria {
 			this->panelInstruccion->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->panelInstruccion->Controls->Add(this->labelInstruccion2);
 			this->panelInstruccion->Controls->Add(this->labelInstruccion);
-			this->panelInstruccion->Location = System::Drawing::Point(489, 12);
+			this->panelInstruccion->Location = System::Drawing::Point(210, 5);
+			this->panelInstruccion->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelInstruccion->Name = L"panelInstruccion";
-			this->panelInstruccion->Size = System::Drawing::Size(1537, 195);
+			this->panelInstruccion->Size = System::Drawing::Size(659, 87);
 			this->panelInstruccion->TabIndex = 1;
 			// 
 			// labelInstruccion2
@@ -168,9 +175,10 @@ namespace DemoLibreria {
 			this->labelInstruccion2->AutoSize = true;
 			this->labelInstruccion2->Font = (gcnew System::Drawing::Font(L"Segoe Print", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelInstruccion2->Location = System::Drawing::Point(142, 116);
+			this->labelInstruccion2->Location = System::Drawing::Point(61, 52);
+			this->labelInstruccion2->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->labelInstruccion2->Name = L"labelInstruccion2";
-			this->labelInstruccion2->Size = System::Drawing::Size(1122, 75);
+			this->labelInstruccion2->Size = System::Drawing::Size(512, 33);
 			this->labelInstruccion2->TabIndex = 1;
 			this->labelInstruccion2->Text = L"según la cantidad de medallas que tenga cada uno.";
 			this->labelInstruccion2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -180,9 +188,10 @@ namespace DemoLibreria {
 			this->labelInstruccion->AutoSize = true;
 			this->labelInstruccion->Font = (gcnew System::Drawing::Font(L"Segoe Print", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelInstruccion->Location = System::Drawing::Point(195, 50);
+			this->labelInstruccion->Location = System::Drawing::Point(84, 22);
+			this->labelInstruccion->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->labelInstruccion->Name = L"labelInstruccion";
-			this->labelInstruccion->Size = System::Drawing::Size(953, 75);
+			this->labelInstruccion->Size = System::Drawing::Size(435, 33);
 			this->labelInstruccion->TabIndex = 0;
 			this->labelInstruccion->Text = L"Ordena de menor a mayor a los niños(as), ";
 			this->labelInstruccion->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -193,9 +202,10 @@ namespace DemoLibreria {
 			this->btnListo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnListo.BackgroundImage")));
 			this->btnListo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->btnListo->Enabled = false;
-			this->btnListo->Location = System::Drawing::Point(1974, 948);
+			this->btnListo->Location = System::Drawing::Point(846, 425);
+			this->btnListo->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnListo->Name = L"btnListo";
-			this->btnListo->Size = System::Drawing::Size(316, 124);
+			this->btnListo->Size = System::Drawing::Size(135, 56);
 			this->btnListo->TabIndex = 0;
 			this->btnListo->TabStop = false;
 			this->btnListo->Visible = false;
@@ -206,9 +216,10 @@ namespace DemoLibreria {
 			this->btnRetroceder->BackColor = System::Drawing::Color::Transparent;
 			this->btnRetroceder->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnRetroceder.BackgroundImage")));
 			this->btnRetroceder->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->btnRetroceder->Location = System::Drawing::Point(122, 966);
+			this->btnRetroceder->Location = System::Drawing::Point(52, 433);
+			this->btnRetroceder->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnRetroceder->Name = L"btnRetroceder";
-			this->btnRetroceder->Size = System::Drawing::Size(316, 124);
+			this->btnRetroceder->Size = System::Drawing::Size(135, 56);
 			this->btnRetroceder->TabIndex = 1;
 			this->btnRetroceder->TabStop = false;
 			this->btnRetroceder->Click += gcnew System::EventHandler(this, &Act1DosMedia::btnRetroceder_Click);
@@ -217,9 +228,10 @@ namespace DemoLibreria {
 			// 
 			this->btnCuatro->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnCuatro.BackgroundImage")));
 			this->btnCuatro->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->btnCuatro->Location = System::Drawing::Point(502, 607);
+			this->btnCuatro->Location = System::Drawing::Point(215, 272);
+			this->btnCuatro->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnCuatro->Name = L"btnCuatro";
-			this->btnCuatro->Size = System::Drawing::Size(315, 340);
+			this->btnCuatro->Size = System::Drawing::Size(135, 152);
 			this->btnCuatro->TabIndex = 7;
 			this->btnCuatro->UseVisualStyleBackColor = true;
 			this->btnCuatro->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Act1DosMedia::btnCuatro_MouseDown);
@@ -230,9 +242,10 @@ namespace DemoLibreria {
 			// 
 			this->btnTres->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnTres.BackgroundImage")));
 			this->btnTres->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->btnTres->Location = System::Drawing::Point(164, 607);
+			this->btnTres->Location = System::Drawing::Point(70, 272);
+			this->btnTres->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnTres->Name = L"btnTres";
-			this->btnTres->Size = System::Drawing::Size(315, 340);
+			this->btnTres->Size = System::Drawing::Size(135, 152);
 			this->btnTres->TabIndex = 6;
 			this->btnTres->UseVisualStyleBackColor = true;
 			this->btnTres->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Act1DosMedia::btnTres_MouseDown);
@@ -243,9 +256,10 @@ namespace DemoLibreria {
 			// 
 			this->btnDos->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnDos.BackgroundImage")));
 			this->btnDos->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->btnDos->Location = System::Drawing::Point(502, 244);
+			this->btnDos->Location = System::Drawing::Point(215, 109);
+			this->btnDos->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnDos->Name = L"btnDos";
-			this->btnDos->Size = System::Drawing::Size(315, 340);
+			this->btnDos->Size = System::Drawing::Size(135, 152);
 			this->btnDos->TabIndex = 5;
 			this->btnDos->UseVisualStyleBackColor = true;
 			this->btnDos->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Act1DosMedia::btnDos_MouseDown);
@@ -256,9 +270,10 @@ namespace DemoLibreria {
 			// 
 			this->btnUno->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnUno.BackgroundImage")));
 			this->btnUno->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->btnUno->Location = System::Drawing::Point(164, 244);
+			this->btnUno->Location = System::Drawing::Point(70, 109);
+			this->btnUno->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->btnUno->Name = L"btnUno";
-			this->btnUno->Size = System::Drawing::Size(315, 340);
+			this->btnUno->Size = System::Drawing::Size(135, 152);
 			this->btnUno->TabIndex = 4;
 			this->btnUno->UseVisualStyleBackColor = true;
 			this->btnUno->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Act1DosMedia::btnUno_MouseDown);
@@ -269,54 +284,60 @@ namespace DemoLibreria {
 			// 
 			this->panelPuestoCuatro->BackColor = System::Drawing::Color::LightGray;
 			this->panelPuestoCuatro->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panelPuestoCuatro->Location = System::Drawing::Point(886, 438);
+			this->panelPuestoCuatro->Location = System::Drawing::Point(380, 196);
+			this->panelPuestoCuatro->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelPuestoCuatro->Name = L"panelPuestoCuatro";
-			this->panelPuestoCuatro->Size = System::Drawing::Size(315, 340);
+			this->panelPuestoCuatro->Size = System::Drawing::Size(137, 155);
 			this->panelPuestoCuatro->TabIndex = 3;
 			// 
 			// panelPuestoTres
 			// 
 			this->panelPuestoTres->BackColor = System::Drawing::Color::LightGray;
 			this->panelPuestoTres->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panelPuestoTres->Location = System::Drawing::Point(1209, 393);
+			this->panelPuestoTres->Location = System::Drawing::Point(518, 176);
+			this->panelPuestoTres->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelPuestoTres->Name = L"panelPuestoTres";
-			this->panelPuestoTres->Size = System::Drawing::Size(315, 340);
+			this->panelPuestoTres->Size = System::Drawing::Size(137, 155);
 			this->panelPuestoTres->TabIndex = 2;
 			// 
 			// panelPuestoDos
 			// 
 			this->panelPuestoDos->BackColor = System::Drawing::Color::LightGray;
 			this->panelPuestoDos->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panelPuestoDos->Location = System::Drawing::Point(1531, 327);
+			this->panelPuestoDos->Location = System::Drawing::Point(656, 147);
+			this->panelPuestoDos->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelPuestoDos->Name = L"panelPuestoDos";
-			this->panelPuestoDos->Size = System::Drawing::Size(315, 340);
+			this->panelPuestoDos->Size = System::Drawing::Size(137, 155);
 			this->panelPuestoDos->TabIndex = 1;
 			// 
 			// panelPuestoUno
 			// 
 			this->panelPuestoUno->BackColor = System::Drawing::Color::LightGray;
 			this->panelPuestoUno->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panelPuestoUno->Location = System::Drawing::Point(1862, 246);
+			this->panelPuestoUno->Location = System::Drawing::Point(798, 110);
+			this->panelPuestoUno->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->panelPuestoUno->Name = L"panelPuestoUno";
-			this->panelPuestoUno->Size = System::Drawing::Size(315, 340);
+			this->panelPuestoUno->Size = System::Drawing::Size(137, 155);
 			this->panelPuestoUno->TabIndex = 0;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox1->Location = System::Drawing::Point(850, 576);
+			this->pictureBox1->Location = System::Drawing::Point(364, 258);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(1372, 375);
+			this->pictureBox1->Size = System::Drawing::Size(588, 168);
 			this->pictureBox1->TabIndex = 8;
 			this->pictureBox1->TabStop = false;
 			// 
 			// Act1DosMedia
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(14, 29);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(2386, 1228);
+			this->ClientSize = System::Drawing::Size(687, 395);
 			this->Controls->Add(this->panelCentro);
+			this->Margin = System::Windows::Forms::Padding(1, 1, 1, 1);
 			this->Name = L"Act1DosMedia";
 			this->Opacity = 0;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;

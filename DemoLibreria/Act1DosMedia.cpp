@@ -32,12 +32,44 @@ System::Void DemoLibreria::Act1DosMedia::Act1DosMedia_Deactivate(System::Object^
 
 System::Void DemoLibreria::Act1DosMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	//	gcnew Etapas(this);
 }
 
 System::Void DemoLibreria::Act1DosMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Act1UnoAlta(this);
+	vector<String^> vectRespuestas;
+	for (int i = 0; i < this->respuestas->Length; i++)
+	{
+		vectRespuestas.push_back(respuestas[i]);
+	}
+
+	delete respuestas;
+
+	controlador->evaluarActividad("Habilidad_Uno", "Medio", 2, vectRespuestas);
+
+	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
+
+	controlador->determinarNivelDeActuacion();
+
+	int cantidad;
+	if (controlador->getUsuario()->getNivel_actuacion() == "Alto")
+	{
+		cantidad = 3;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Medio")
+	{
+		cantidad = 2;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Bajo")
+	{
+		cantidad = 1;
+	}
+
+	//Muestro el nivel de actuacion
+	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
+
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, usuario, controlador);
+	form_estrella->ShowDialog();
 }
 
 System::Void DemoLibreria::Act1DosMedia::inicializarPosicion()
@@ -97,7 +129,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseDown(System::Object^  se
 	this->btnPresionado = true;
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnUno_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -107,7 +139,7 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseMove(System::Object^  sende
 	}
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnDos_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -117,7 +149,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseMove(System::Object^  sende
 	}
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnTres_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -127,7 +159,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseMove(System::Object^  send
 	}
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->posMouseFormX = this->posActBtnX + e->Location.X;
 	this->posMouseFormY = this->posActBtnY + e->Location.Y;
@@ -137,7 +169,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseMove(System::Object^  se
 	}
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->btnUno->Location.X;
@@ -146,15 +178,16 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender,
 	if (x > this->panelPuestoUno->Location.X && x < this->panelPuestoUno->Location.X + this->panelPuestoUno->Size.Width &&
 		y > this->panelPuestoUno->Location.Y && y < this->panelPuestoUno->Location.Y + this->panelPuestoUno->Size.Height)
 	{
-		if (this->btnDos->Location != this->panelPuestoUno->Location && 
-			this->btnTres->Location != this->panelPuestoUno->Location && 
-			this->btnCuatro->Location != this->panelPuestoUno->Location) 
+		if (this->btnDos->Location != this->panelPuestoUno->Location &&
+			this->btnTres->Location != this->panelPuestoUno->Location &&
+			this->btnCuatro->Location != this->panelPuestoUno->Location)
 		{
 			this->btnUno->Location = System::Drawing::Point(this->panelPuestoUno->Location.X, this->panelPuestoUno->Location.Y);
 			this->listoBtnUno = true;
 			this->posicionBtnUno = 1;
+			respuestas[0] = "PN1_PDO1";
 		}
-		else 
+		else
 		{
 			this->btnUno->Location = System::Drawing::Point(this->xBtnUno, this->yBtnUno);
 			this->listoBtnUno = false;
@@ -171,6 +204,7 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender,
 			this->btnUno->Location = System::Drawing::Point(this->panelPuestoDos->Location.X, this->panelPuestoDos->Location.Y);
 			this->listoBtnUno = true;
 			this->posicionBtnUno = 2;
+			respuestas[0] = "PN1_PDO2";
 		}
 		else
 		{
@@ -189,6 +223,7 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender,
 			this->btnUno->Location = System::Drawing::Point(this->panelPuestoTres->Location.X, this->panelPuestoTres->Location.Y);
 			this->listoBtnUno = true;
 			this->posicionBtnUno = 3;
+			respuestas[0] = "PN1_PDO3";
 		}
 		else
 		{
@@ -207,6 +242,7 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender,
 			this->btnUno->Location = System::Drawing::Point(this->panelPuestoCuatro->Location.X, this->panelPuestoCuatro->Location.Y);
 			this->listoBtnUno = true;
 			this->posicionBtnUno = 4;
+			respuestas[0] = "PN1_PDO4";
 		}
 		else
 		{
@@ -223,7 +259,7 @@ System::Void DemoLibreria::Act1DosMedia::btnUno_MouseUp(System::Object^  sender,
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->btnDos->Location.X;
@@ -239,6 +275,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender,
 			this->btnDos->Location = System::Drawing::Point(this->panelPuestoUno->Location.X, this->panelPuestoUno->Location.Y);
 			this->listoBtnDos = true;
 			this->posicionBtnDos = 1;
+			respuestas[1] = "PN2_PDO1";
 		}
 		else
 		{
@@ -257,6 +294,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender,
 			this->btnDos->Location = System::Drawing::Point(this->panelPuestoDos->Location.X, this->panelPuestoDos->Location.Y);
 			this->listoBtnDos = true;
 			this->posicionBtnDos = 2;
+			respuestas[1] = "PN2_PDO2";
 		}
 		else
 		{
@@ -275,6 +313,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender,
 			this->btnDos->Location = System::Drawing::Point(this->panelPuestoTres->Location.X, this->panelPuestoTres->Location.Y);
 			this->listoBtnDos = true;
 			this->posicionBtnDos = 3;
+			respuestas[1] = "PN2_PDO3";
 		}
 		else
 		{
@@ -293,6 +332,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender,
 			this->btnDos->Location = System::Drawing::Point(this->panelPuestoCuatro->Location.X, this->panelPuestoCuatro->Location.Y);
 			this->listoBtnDos = true;
 			this->posicionBtnDos = 4;
+			respuestas[1] = "PN2_PDO4";
 		}
 		else
 		{
@@ -309,7 +349,7 @@ System::Void DemoLibreria::Act1DosMedia::btnDos_MouseUp(System::Object^  sender,
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->btnTres->Location.X;
@@ -325,6 +365,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender
 			this->btnTres->Location = System::Drawing::Point(this->panelPuestoUno->Location.X, this->panelPuestoUno->Location.Y);
 			this->listoBtnTres = true;
 			this->posicionBtnTres = 1;
+			respuestas[2] = "PN3_PDO1";
 		}
 		else
 		{
@@ -343,6 +384,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender
 			this->btnTres->Location = System::Drawing::Point(this->panelPuestoDos->Location.X, this->panelPuestoDos->Location.Y);
 			this->listoBtnTres = true;
 			this->posicionBtnTres = 2;
+			respuestas[2] = "PN3_PDO2";
 		}
 		else
 		{
@@ -361,6 +403,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender
 			this->btnTres->Location = System::Drawing::Point(this->panelPuestoTres->Location.X, this->panelPuestoTres->Location.Y);
 			this->listoBtnTres = true;
 			this->posicionBtnTres = 3;
+			respuestas[2] = "PN3_PDO3";
 		}
 		else
 		{
@@ -379,6 +422,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender
 			this->btnTres->Location = System::Drawing::Point(this->panelPuestoCuatro->Location.X, this->panelPuestoCuatro->Location.Y);
 			this->listoBtnTres = true;
 			this->posicionBtnTres = 4;
+			respuestas[2] = "PN3_PDO4";
 		}
 		else
 		{
@@ -395,7 +439,7 @@ System::Void DemoLibreria::Act1DosMedia::btnTres_MouseUp(System::Object^  sender
 	comprobarActividadCompletada();
 }
 
-System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) 
+System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	this->btnPresionado = false;
 	int x = this->btnCuatro->Location.X;
@@ -411,6 +455,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  send
 			this->btnCuatro->Location = System::Drawing::Point(this->panelPuestoUno->Location.X, this->panelPuestoUno->Location.Y);
 			this->listoBtnCuatro = true;
 			this->posicionBtnCuatro = 1;
+			respuestas[3] = "PN4_PDO1";
 		}
 		else
 		{
@@ -429,6 +474,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  send
 			this->btnCuatro->Location = System::Drawing::Point(this->panelPuestoDos->Location.X, this->panelPuestoDos->Location.Y);
 			this->listoBtnCuatro = true;
 			this->posicionBtnCuatro = 2;
+			respuestas[3] = "PN4_PDO2";
 		}
 		else
 		{
@@ -447,6 +493,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  send
 			this->btnCuatro->Location = System::Drawing::Point(this->panelPuestoTres->Location.X, this->panelPuestoTres->Location.Y);
 			this->listoBtnCuatro = true;
 			this->posicionBtnCuatro = 3;
+			respuestas[3] = "PN4_PDO3";
 		}
 		else
 		{
@@ -465,6 +512,7 @@ System::Void DemoLibreria::Act1DosMedia::btnCuatro_MouseUp(System::Object^  send
 			this->btnCuatro->Location = System::Drawing::Point(this->panelPuestoCuatro->Location.X, this->panelPuestoCuatro->Location.Y);
 			this->listoBtnCuatro = true;
 			this->posicionBtnCuatro = 4;
+			respuestas[3] = "PN4_PDO4";
 		}
 		else
 		{

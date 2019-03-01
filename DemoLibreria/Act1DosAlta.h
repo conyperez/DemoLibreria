@@ -15,7 +15,7 @@ namespace DemoLibreria {
 	/// <summary>
 	/// Resumen de Act1DosAlta
 	/// </summary>
-	public ref class Act1DosAlta : public System::Windows::Forms::Form
+	ref class Act1DosAlta : public System::Windows::Forms::Form
 	{
 	public:
 		Act1DosAlta(Form^ formAnterior)
