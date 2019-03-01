@@ -101,7 +101,7 @@ namespace DemoLibreria {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Candara", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Location = System::Drawing::Point(516, 646);
+			this->button1->Location = System::Drawing::Point(516, 662);
 			this->button1->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(317, 100);
@@ -115,7 +115,7 @@ namespace DemoLibreria {
 			this->estrellaUnoE->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaUnoE->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaUnoE.BackgroundImage")));
 			this->estrellaUnoE->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaUnoE->Location = System::Drawing::Point(111, 4);
+			this->estrellaUnoE->Location = System::Drawing::Point(112, -214);
 			this->estrellaUnoE->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaUnoE->Name = L"estrellaUnoE";
 			this->estrellaUnoE->Size = System::Drawing::Size(326, 623);
@@ -128,7 +128,7 @@ namespace DemoLibreria {
 			this->estrellaDosE->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaDosE->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaDosE.BackgroundImage")));
 			this->estrellaDosE->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaDosE->Location = System::Drawing::Point(509, -33);
+			this->estrellaDosE->Location = System::Drawing::Point(510, -251);
 			this->estrellaDosE->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaDosE->Name = L"estrellaDosE";
 			this->estrellaDosE->Size = System::Drawing::Size(326, 623);
@@ -141,7 +141,7 @@ namespace DemoLibreria {
 			this->estrellaTresE->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaTresE->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaTresE.BackgroundImage")));
 			this->estrellaTresE->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaTresE->Location = System::Drawing::Point(899, 6);
+			this->estrellaTresE->Location = System::Drawing::Point(900, -212);
 			this->estrellaTresE->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaTresE->Name = L"estrellaTresE";
 			this->estrellaTresE->Size = System::Drawing::Size(326, 623);
@@ -154,7 +154,7 @@ namespace DemoLibreria {
 			this->estrellaTres->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaTres->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaTres.BackgroundImage")));
 			this->estrellaTres->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaTres->Location = System::Drawing::Point(898, 4);
+			this->estrellaTres->Location = System::Drawing::Point(900, -216);
 			this->estrellaTres->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaTres->Name = L"estrellaTres";
 			this->estrellaTres->Size = System::Drawing::Size(326, 623);
@@ -166,7 +166,7 @@ namespace DemoLibreria {
 			this->estrellaDos->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaDos->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaDos.BackgroundImage")));
 			this->estrellaDos->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaDos->Location = System::Drawing::Point(507, -33);
+			this->estrellaDos->Location = System::Drawing::Point(509, -253);
 			this->estrellaDos->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaDos->Name = L"estrellaDos";
 			this->estrellaDos->Size = System::Drawing::Size(326, 623);
@@ -178,7 +178,7 @@ namespace DemoLibreria {
 			this->estrellaUno->BackColor = System::Drawing::Color::Transparent;
 			this->estrellaUno->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"estrellaUno.BackgroundImage")));
 			this->estrellaUno->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->estrellaUno->Location = System::Drawing::Point(109, 9);
+			this->estrellaUno->Location = System::Drawing::Point(111, -211);
 			this->estrellaUno->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->estrellaUno->Name = L"estrellaUno";
 			this->estrellaUno->Size = System::Drawing::Size(326, 623);
@@ -190,7 +190,7 @@ namespace DemoLibreria {
 			this->mensaje1->BackColor = System::Drawing::Color::Transparent;
 			this->mensaje1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"mensaje1.BackgroundImage")));
 			this->mensaje1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->mensaje1->Location = System::Drawing::Point(328, 15);
+			this->mensaje1->Location = System::Drawing::Point(329, 405);
 			this->mensaje1->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->mensaje1->Name = L"mensaje1";
 			this->mensaje1->Size = System::Drawing::Size(688, 245);
@@ -202,7 +202,7 @@ namespace DemoLibreria {
 			this->mensaje2->BackColor = System::Drawing::Color::Transparent;
 			this->mensaje2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"mensaje2.BackgroundImage")));
 			this->mensaje2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->mensaje2->Location = System::Drawing::Point(209, 18);
+			this->mensaje2->Location = System::Drawing::Point(210, 408);
 			this->mensaje2->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->mensaje2->Name = L"mensaje2";
 			this->mensaje2->Size = System::Drawing::Size(938, 245);
@@ -215,7 +215,7 @@ namespace DemoLibreria {
 			this->mensaje3->BackColor = System::Drawing::Color::Transparent;
 			this->mensaje3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"mensaje3.BackgroundImage")));
 			this->mensaje3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->mensaje3->Location = System::Drawing::Point(284, 71);
+			this->mensaje3->Location = System::Drawing::Point(285, 461);
 			this->mensaje3->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->mensaje3->Name = L"mensaje3";
 			this->mensaje3->Size = System::Drawing::Size(817, 129);
