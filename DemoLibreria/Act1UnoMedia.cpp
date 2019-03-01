@@ -1,6 +1,6 @@
 #include "Act1UnoMedia.h"
 #include "Act1DosMedia.h"
-#include "Etapas.h"
+#include "EtapasActividad.h"
 #include "FormEstrella.h"
 
 System::Void DemoLibreria::Act1UnoMedia::timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -33,7 +33,7 @@ System::Void DemoLibreria::Act1UnoMedia::Act1UnoMedia_Deactivate(System::Object^
 
 System::Void DemoLibreria::Act1UnoMedia::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this, usuario, controlador);
+	gcnew EtapasActividad(this, usuario, controlador);
 }
 
 System::Void DemoLibreria::Act1UnoMedia::btnListo_Click(System::Object^  sender, System::EventArgs^  e)

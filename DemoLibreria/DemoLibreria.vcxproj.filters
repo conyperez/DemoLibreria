@@ -141,6 +141,9 @@
     <ClInclude Include="FormEstrella.h">
       <Filter>Archivos de encabezado\InterfazGrafica\Ventanas Emergentes</Filter>
     </ClInclude>
+    <ClInclude Include="EtapasActividad.h">
+      <Filter>Archivos de encabezado\InterfazGrafica</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Inicio.cpp">
@@ -203,6 +206,9 @@
     <ClCompile Include="FormEstrella.cpp">
       <Filter>Archivos de origen\InterfazGrafica\Ventanas Emergentes</Filter>
     </ClCompile>
+    <ClCompile Include="EtapasActividad.cpp">
+      <Filter>Archivos de origen\InterfazGrafica</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inicio.resx">
@@ -221,6 +227,9 @@
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Act1DosAlta.resx">
+      <Filter>Archivos de recursos</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEstrella.resx">
       <Filter>Archivos de recursos</Filter>
     </EmbeddedResource>
   </ItemGroup>

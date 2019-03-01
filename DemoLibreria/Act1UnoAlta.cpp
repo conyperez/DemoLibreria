@@ -1,7 +1,7 @@
 #include "Act1UnoAlta.h"
 #include "Act1DosAlta.h"
 #include "FormEstrella.h"
-#include "Etapas.h"
+#include "EtapasActividad.h"
 
 System::Void DemoLibreria::Act1UnoAlta::timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -33,7 +33,7 @@ System::Void DemoLibreria::Act1UnoAlta::Act1UnoAlta_Deactivate(System::Object^  
 
 System::Void DemoLibreria::Act1UnoAlta::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this, this->usuario, this->controlador);
+	gcnew EtapasActividad(this, this->usuario, this->controlador);
 }
 
 System::Void DemoLibreria::Act1UnoAlta::btnListo_Click(System::Object^  sender, System::EventArgs^ e)

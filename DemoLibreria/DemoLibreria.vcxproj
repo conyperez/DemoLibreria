@@ -146,6 +146,7 @@
     <ClCompile Include="BaseDeHechos.cpp" />
     <ClCompile Include="Conector.cpp" />
     <ClCompile Include="Etapas.cpp" />
+    <ClCompile Include="EtapasActividad.cpp" />
     <ClCompile Include="Evaluador.cpp" />
     <ClCompile Include="FormEstrella.cpp" />
     <ClCompile Include="Hecho.cpp" />
@@ -180,6 +181,9 @@
     <ClInclude Include="Etapas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="EtapasActividad.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Evaluador.h" />
     <ClInclude Include="FormEstrella.h">
       <FileType>CppForm</FileType>
@@ -209,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Etapas.resx">
       <DependentUpon>Etapas.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EtapasActividad.resx">
+      <DependentUpon>EtapasActividad.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEstrella.resx">
       <DependentUpon>FormEstrella.h</DependentUpon>

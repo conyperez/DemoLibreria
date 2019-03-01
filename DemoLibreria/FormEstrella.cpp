@@ -1,5 +1,5 @@
 #include "FormEstrella.h"
-#include "Etapas.h"
+#include "EtapasActividad.h"
 
 System::Void DemoLibreria::FormEstrella::button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	determinarFormHabilidad();
@@ -8,11 +8,9 @@ System::Void DemoLibreria::FormEstrella::button1_Click(System::Object^  sender, 
 
 System::Void DemoLibreria::FormEstrella::determinarFormHabilidad() {
 
-	if (habilidad == "Habilidad_Uno") {
-		gcnew Etapas(formActividad, usuario, controlador);
-	}
-	else if (habilidad == "Habilidad_Uno") {
-		MessageBox::Show("Avanza a la Habilidad 2");
+	if (habilidad == "Habilidad_Uno") 
+	{
+		gcnew EtapasActividad(formActividad, usuario, controlador);
 	}
 }
 

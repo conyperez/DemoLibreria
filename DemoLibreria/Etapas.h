@@ -49,15 +49,11 @@ namespace DemoLibreria {
 		}
 	private: System::Windows::Forms::Form^ formAnterior;
 	private: System::Windows::Forms::Timer^  timerPantalla;
-
 	private: System::Windows::Forms::PictureBox^  btnHabilidadDos;
 	private: System::Windows::Forms::PictureBox^  btnHabilidadUno;
 	private: System::Windows::Forms::PictureBox^  btnHabilidadDosN;
-
 	private: System::Windows::Forms::PictureBox^  btnHabilidadUnoN;
 	private: System::Windows::Forms::PictureBox^  btnHabilidadDosE;
-
-
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
