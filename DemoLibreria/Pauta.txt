@@ -1,1 +1,2 @@
 ﻿Habilidad_Uno,Medio,1,(B1_CA B2_BR B3_CA B4_CR B5_CA)
+Habilidad_Uno,Medio,2,(PN1_PO4 PN2_PO2 PN3_PO1 PN4_PO3)
