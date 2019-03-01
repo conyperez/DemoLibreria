@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Usuario.h"
+#include "AgenteControlador.h"
+
 namespace DemoLibreria {
 
 	using namespace System;
@@ -23,7 +26,16 @@ namespace DemoLibreria {
 			this->Size = System::Drawing::Size(1050, 598);
 			this->Show();
 		}
-
+		Act1DosAlta(Form^ formAnterior, Usuario^ usuario, AgenteControlador^ controlador)
+		{
+			this->formAnterior = formAnterior;
+			this->usuario = usuario;
+			this->controlador = controlador;
+			InitializeComponent();
+			inicializarPosicion();
+			this->Size = System::Drawing::Size(1050, 598);
+			this->Show();
+		}
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
@@ -35,6 +47,8 @@ namespace DemoLibreria {
 				delete components;
 			}
 		}
+	private: Usuario^ usuario;
+	private: AgenteControlador^ controlador;
 	private: int posicionBtnUno = 0, posicionBtnDos = 0, posicionBtnTres = 0, posicionBtnCuatro = 0;
 	private: int contadorUno = 0, contadorDos = 0, contadorTres = 0, contadorCuatro = 0;
 	private: bool listoBtnUno = false, listoBtnDos = false, listoBtnTres = false, listoBtnCuatro = false;
@@ -45,7 +59,6 @@ namespace DemoLibreria {
 	private: System::Windows::Forms::Timer^  timerPantalla;
 	private: System::Windows::Forms::Panel^  panelCentro;
 	private: System::Windows::Forms::Panel^  panelInstruccion;
-
 	private: System::Windows::Forms::Label^  labelInstruccion;
 	private: System::Windows::Forms::Label^  labelInstruccion2;
 	private: System::Windows::Forms::PictureBox^  btnRetroceder;

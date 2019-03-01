@@ -75,10 +75,8 @@ System::Void DemoLibreria::Act1UnoAlta::btnListo_Click(System::Object^  sender, 
 	//Muestro el nivel de actuacion
 	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
 
-	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad);
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, this->usuario, this->controlador);
 	form_estrella->ShowDialog();
-
-	gcnew Act1DosAlta(this);
 }
 
 System::Void DemoLibreria::Act1UnoAlta::numUno1_Click(System::Object^  sender, System::EventArgs^ e)

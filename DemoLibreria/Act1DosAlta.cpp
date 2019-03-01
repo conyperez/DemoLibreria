@@ -1,5 +1,6 @@
 #include "Act1DosAlta.h"
 #include "Etapas.h"
+#include "FormEstrella.h"
 
 System::Void DemoLibreria::Act1DosAlta::timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -31,12 +32,46 @@ System::Void DemoLibreria::Act1DosAlta::Act1DosAlta_Deactivate(System::Object^  
 
 System::Void DemoLibreria::Act1DosAlta::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	gcnew Etapas(this, this->usuario, this->controlador);
 }
 
 System::Void DemoLibreria::Act1DosAlta::btnListo_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	vector<String^> vectRespuestas;
+	vectRespuestas.push_back(Convert::ToString(this->contadorUno));
+	vectRespuestas.push_back(Convert::ToString(this->contadorDos));
+	vectRespuestas.push_back(Convert::ToString(this->contadorTres));
+	vectRespuestas.push_back(Convert::ToString(this->contadorCuatro));
+	vectRespuestas.push_back(Convert::ToString(this->posicionBtnUno));
+	vectRespuestas.push_back(Convert::ToString(this->posicionBtnDos));
+	vectRespuestas.push_back(Convert::ToString(this->posicionBtnTres));
+	vectRespuestas.push_back(Convert::ToString(this->posicionBtnCuatro));
+
+	controlador->evaluarActividad("Habilidad_Uno", "Alto", 2, vectRespuestas);
+
+	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
+
+	controlador->determinarNivelDeActuacion();
+
+	int cantidad;
+	if (controlador->getUsuario()->getNivel_actuacion() == "Alto")
+	{
+		cantidad = 3;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Medio")
+	{
+		cantidad = 2;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Bajo")
+	{
+		cantidad = 1;
+	}
+
+	//Muestro el nivel de actuacion
+	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
+
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, this->usuario, this->controlador);
+	form_estrella->ShowDialog();
 }
 
 System::Void DemoLibreria::Act1DosAlta::inicializarPosicion()

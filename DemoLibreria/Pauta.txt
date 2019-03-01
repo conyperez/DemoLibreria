@@ -1,2 +1,3 @@
 ﻿Habilidad_Uno,Medio,1,(B1_CA B2_BR B3_CA B4_CR B5_CA)
 Habilidad_Uno,Alto,1,(False True True True True True False False True True False True)
+Habilidad_Uno,Alto,2,(17 13 11 20 3 2 1 4)
