@@ -15,7 +15,7 @@ namespace DemoLibreria {
 	/// <summary>
 	/// Resumen de Act1UnoAlta
 	/// </summary>
-	public ref class Act1UnoAlta : public System::Windows::Forms::Form
+	ref class Act1UnoAlta : public System::Windows::Forms::Form
 	{
 	public:
 		Act1UnoAlta(Form^ formAnterior)
@@ -93,12 +93,6 @@ namespace DemoLibreria {
 	private: System::Windows::Forms::PictureBox^  numCuatro1M;
 	private: System::Windows::Forms::PictureBox^  numCuatro2M;
 	private: System::ComponentModel::IContainer^  components;
-
-	private:
-		/// <summary>
-		/// Variable del diseñador necesaria.
-		/// </summary>
-
 
 #pragma region Windows Form Designer generated code
 		/// <summary>

@@ -39,6 +39,8 @@ System::Void DemoLibreria::Etapas::Etapas_Load(System::Object^  sender, System::
 		//Desbloqueo los botones
 		this->btnHabilidadDos->Enabled = true;
 		this->btnHabilidadDosE->Visible = false;
+		this->btnHabilidadDos->Visible = true;
+		this->btnHabilidadDosN->Visible = true;
 		this->btnHabilidadDosE->Enabled = true;
 		this->btnHabilidadDosN->Enabled = true;
 
@@ -66,11 +68,11 @@ System::Void DemoLibreria::Etapas::btnHabilidadUno_Click(System::Object^  sender
 	{
 		if (num_actividad == 1)
 		{
-			gcnew Act1UnoAlta(this);
+			gcnew Act1UnoAlta(this,usuario,controlador);
 		}
 		else
 		{
-			gcnew Act1DosAlta(this);
+			gcnew Act1DosAlta(this,usuario,controlador);
 		}
 	}
 	else if (actividad_asignada[1] == "Medio")

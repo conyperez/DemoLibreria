@@ -52,7 +52,7 @@ System::Void DemoLibreria::Act1UnoAlta::btnListo_Click(System::Object^  sender, 
 	vectRespuestas.push_back(Convert::ToString(this->marcaCuatro2));
 	vectRespuestas.push_back(Convert::ToString(this->marcaCuatro3));
 
-	controlador->evaluarActividad("Habilidad_Uno", "Alto", 1, vectRespuestas);
+	controlador->evaluarActividad("Habilidad_Uno", "Dificil", 1, vectRespuestas);
 
 	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
 
