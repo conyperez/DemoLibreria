@@ -77,7 +77,6 @@ namespace DemoLibreria {
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	private: System::Windows::Forms::Panel^  panel2;
 	private: System::ComponentModel::IContainer^  components;
-
 	private:
 		Usuario^ usuario;
 		AgenteControlador^ controlador;

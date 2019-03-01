@@ -1,5 +1,6 @@
 #include "Act1UnoAlta.h"
 #include "Act1DosAlta.h"
+#include "FormEstrella.h"
 #include "Etapas.h"
 
 System::Void DemoLibreria::Act1UnoAlta::timerPantalla_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -32,12 +33,50 @@ System::Void DemoLibreria::Act1UnoAlta::Act1UnoAlta_Deactivate(System::Object^  
 
 System::Void DemoLibreria::Act1UnoAlta::btnRetroceder_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	gcnew Etapas(this);
+	gcnew Etapas(this, this->usuario, this->controlador);
 }
 
 System::Void DemoLibreria::Act1UnoAlta::btnListo_Click(System::Object^  sender, System::EventArgs^ e)
 {
-	gcnew Act1DosAlta(this);
+	vector<String^> vectRespuestas;
+	vectRespuestas.push_back(Convert::ToString(this->marcaUno1));
+	vectRespuestas.push_back(Convert::ToString(this->marcaUno2));
+	vectRespuestas.push_back(Convert::ToString(this->marcaUno3));
+	vectRespuestas.push_back(Convert::ToString(this->marcaDos1));
+	vectRespuestas.push_back(Convert::ToString(this->marcaDos2));
+	vectRespuestas.push_back(Convert::ToString(this->marcaDos3));
+	vectRespuestas.push_back(Convert::ToString(this->marcaTres1));
+	vectRespuestas.push_back(Convert::ToString(this->marcaTres2));
+	vectRespuestas.push_back(Convert::ToString(this->marcaTres3));
+	vectRespuestas.push_back(Convert::ToString(this->marcaCuatro1));
+	vectRespuestas.push_back(Convert::ToString(this->marcaCuatro2));
+	vectRespuestas.push_back(Convert::ToString(this->marcaCuatro3));
+
+	controlador->evaluarActividad("Habilidad_Uno", "Alto", 1, vectRespuestas);
+
+	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
+
+	controlador->determinarNivelDeActuacion();
+
+	int cantidad;
+	if (controlador->getUsuario()->getNivel_actuacion() == "Alto")
+	{
+		cantidad = 3;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Medio")
+	{
+		cantidad = 2;
+	}
+	else if (controlador->getUsuario()->getNivel_actuacion() == "Bajo")
+	{
+		cantidad = 1;
+	}
+
+	//Muestro el nivel de actuacion
+	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
+
+	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, this->usuario, this->controlador);
+	form_estrella->ShowDialog();
 }
 
 System::Void DemoLibreria::Act1UnoAlta::numUno1_Click(System::Object^  sender, System::EventArgs^ e)
