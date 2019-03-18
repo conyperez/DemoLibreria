@@ -143,13 +143,6 @@ bool Regla::operator!=(Regla ^ r2)
 	return true;
 }
 
-bool Regla::Equals(Regla ^ r1)
-{
-	if (this == r1)
-		return true;
-	return false;
-}
-
 Regla% Regla::operator=(const Regla% r)
 {
 	return *this;

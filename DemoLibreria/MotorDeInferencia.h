@@ -28,7 +28,6 @@ public:
 #pragma region Gets && Sets
 	Regla ^ getReglaInferida();
 	bool getTerminoInferencia();
-	void setDetenerInferencia(bool value);
 #pragma endregion
 
 private:
@@ -37,5 +36,4 @@ private:
 	Regla ^ reglaInferida;
 	bool terminoInferencia;
 	bool detenerInferencia;
-	int nivel;
 };

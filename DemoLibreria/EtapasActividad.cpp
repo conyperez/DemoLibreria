@@ -20,10 +20,10 @@ System::Void DemoLibreria::EtapasActividad::EtapasActividad_Load(System::Object^
 	this->timerPantalla->Start();
 	
 	// Si coloco esto aca, ahi sale la tercera actividad...
-	controlador->determinarActividadDificultadHabilidad("estado");
+	actividad_asignada = controlador->determinarActividadDificultadHabilidad("estado");
 
 	//veo que dificultad de le toca y que actividad
-	if (this->controlador->getPercepciones()->getDificultad() == "Dificil")
+	if (actividad_asignada[1] == "Dificil")
 	{
 		if (this->controlador->getPercepciones()->getNumeroActividad() == 1)
 		{
@@ -36,9 +36,9 @@ System::Void DemoLibreria::EtapasActividad::EtapasActividad_Load(System::Object^
 			this->btn4E->Visible = false;
 		}
 	}
-	else if (this->controlador->getPercepciones()->getDificultad() == "Medio")
+	else if (actividad_asignada[1] == "Medio")
 	{
-		if (this->controlador->getPercepciones()->getNumeroActividad() == 1)
+		if (actividad_asignada[2] == "1")
 		{
 			this->btn1->Visible = true;
 			this->btn1E->Visible = false;
@@ -51,7 +51,7 @@ System::Void DemoLibreria::EtapasActividad::EtapasActividad_Load(System::Object^
 	}
 	else //dificultad Baja
 	{
-		if (this->controlador->getPercepciones()->getNumeroActividad() == 1)
+		if (actividad_asignada[2] == "1")
 		{
 			MessageBox::Show("Esta en la dificultad Baja actividad 1");
 		}
@@ -61,7 +61,7 @@ System::Void DemoLibreria::EtapasActividad::EtapasActividad_Load(System::Object^
 		}
 	}
 
-	if (this->controlador->getPercepciones()->getHabilidad() == "Habilidad_Dos")
+	if (actividad_asignada[0] == "Habilidad_Dos")
 	{
 		MessageBox::Show("Avanza a la siguiente habilidad");
 	}

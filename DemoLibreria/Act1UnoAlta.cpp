@@ -59,21 +59,23 @@ System::Void DemoLibreria::Act1UnoAlta::btnListo_Click(System::Object^  sender, 
 	controlador->determinarNivelDeActuacion();
 
 	int cantidad;
-	if (controlador->getUsuario()->getNivel_actuacion() == "Alto")
+	if (controlador->getPercepciones()->getNivelDeActuacion() == "Alto")
 	{
 		cantidad = 3;
 	}
-	else if (controlador->getUsuario()->getNivel_actuacion() == "Medio")
+	else if (controlador->getPercepciones()->getNivelDeActuacion() == "Medio")
 	{
 		cantidad = 2;
 	}
-	else if (controlador->getUsuario()->getNivel_actuacion() == "Bajo")
+	else if (controlador->getPercepciones()->getNivelDeActuacion() == "Bajo")
 	{
 		cantidad = 1;
 	}
 
+	usuario->setHizo_actividad(true);
+
 	//Muestro el nivel de actuacion
-	MessageBox::Show("Nivel de Actuacion: " + controlador->getUsuario()->getNivel_actuacion());
+	MessageBox::Show("Nivel de Actuacion: " + controlador->getPercepciones()->getNivelDeActuacion());
 
 	FormEstrella^ form_estrella = gcnew FormEstrella("Habilidad_Uno", this, cantidad, this->usuario, this->controlador);
 	form_estrella->ShowDialog();

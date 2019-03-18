@@ -6,7 +6,6 @@ MotorDeInferencia::MotorDeInferencia(BaseDeHechos ^ baseHechos, BaseDeConocimien
 	this->baseHechos = baseHechos;
 	this->detenerInferencia = false;
 	this->terminoInferencia = false;
-	this->nivel = 0;
 }
 
 MotorDeInferencia::~MotorDeInferencia()
@@ -139,9 +138,7 @@ Hecho ^ MotorDeInferencia::encadenamientoHaciaAtras(Hecho ^ hechoMeta)
 			tam = reglaActual->getCuerpo().size();
 			for (int y = 0; y < tam && !reglaFalsa; y++)
 			{
-				nivel++;
 				resultado = encadenamientoHaciaAtras(reglaActual->getCuerpo()[y]);
-				nivel--;
 				if (resultado->getEstado() == FALSO)
 				{
 					verdadero = false;
@@ -223,7 +220,6 @@ Hecho ^ MotorDeInferencia::ejecutar(String ^ objetivo, int encadenamiento)
 				}
 			}
 			desmarcarReglas();
-			nivel = 0;
 			Hecho ^hechoResultado = encadenamientoHaciaAtras(reglaMaximo->getCabeza());
 			if (hechoResultado->getEstado() == VERDADERO)
 			{
@@ -276,10 +272,4 @@ bool MotorDeInferencia::getTerminoInferencia()
 {
 	return this->terminoInferencia;
 }
-
-void MotorDeInferencia::setDetenerInferencia(bool value)
-{
-	this->detenerInferencia = value;
-}
-
 

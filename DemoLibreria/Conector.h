@@ -14,7 +14,6 @@ public:
 	void agregarRegla(Regla^ regla);
 	void agregarHecho(Hecho^ hecho);
 	void borrarHechos();
-	bool getLeyendoRegla();
 	void inicioRegla();
 	void finRegla();
 	String ^ ejecutarMotorInferencia(String ^objetivo, int encadenamiento);
@@ -22,7 +21,6 @@ public:
 	BaseDeConocimiento^ obtenerBaseDeConocimiento();
 	BaseDeHechos^ obtenerBaseDeHechos();
 	MotorDeInferencia ^ obtenerMotorDeInferencia();
-	void cerrarArchivo();
 	String^ pasarRegla_A_String(Regla^ regla);
 
 private:

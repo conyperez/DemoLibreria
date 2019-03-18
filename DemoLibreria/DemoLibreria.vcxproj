@@ -145,9 +145,11 @@
     <ClCompile Include="BaseDeConocimiento.cpp" />
     <ClCompile Include="BaseDeHechos.cpp" />
     <ClCompile Include="Conector.cpp" />
+    <ClCompile Include="ConjuntoFactores.cpp" />
     <ClCompile Include="Etapas.cpp" />
     <ClCompile Include="EtapasActividad.cpp" />
     <ClCompile Include="Evaluador.cpp" />
+    <ClCompile Include="Factor.cpp" />
     <ClCompile Include="FormEstrella.cpp" />
     <ClCompile Include="Hecho.cpp" />
     <ClCompile Include="Inicio.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="BaseDeConocimiento.h" />
     <ClInclude Include="BaseDeHechos.h" />
     <ClInclude Include="Conector.h" />
+    <ClInclude Include="ConjuntoFactores.h" />
     <ClInclude Include="Etapas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -185,6 +188,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Evaluador.h" />
+    <ClInclude Include="Factor.h" />
     <ClInclude Include="FormEstrella.h">
       <FileType>CppForm</FileType>
     </ClInclude>

@@ -17,7 +17,6 @@ public:
 #pragma region Metodos
 	bool operator==(Argumento^ arg);
 	bool operator!=(Argumento^ arg);
-	bool Equals(Argumento^ arg);
 #pragma endregion
 private:
 	String^ argumento;

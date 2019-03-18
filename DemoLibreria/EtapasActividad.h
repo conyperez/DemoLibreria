@@ -15,7 +15,7 @@ namespace DemoLibreria {
 	/// <summary>
 	/// Resumen de EtapasActividad
 	/// </summary>
-	public ref class EtapasActividad : public System::Windows::Forms::Form
+	ref class EtapasActividad : public System::Windows::Forms::Form
 	{
 	public:
 		EtapasActividad(Form^ formAnterior)
@@ -49,6 +49,7 @@ namespace DemoLibreria {
 	private: int num_actividad;
 	private: Usuario^ usuario;
 	private: AgenteControlador^ controlador;
+	private: vector<String^> actividad_asignada;
 	private: System::Windows::Forms::Form^ formAnterior;
 	private: System::Windows::Forms::Timer^  timerPantalla;
 	private: System::Windows::Forms::PictureBox^  btnRetroceder;

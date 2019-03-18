@@ -1,9 +1,12 @@
 #include "AgenteControlador.h"
 
-AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo, String^ nombre_usuario)
+AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo, String^ nombre_usuario, int limit_inf, int limit_med, int limit_sup)
 {
 	usuario = _usuario;
 	direccion = _nombreArchivo;
+	this->limite_inf = limit_inf;
+	this->limite_med = limit_med;
+	this->limite_sup = limit_sup;
 	archivo = gcnew LeerArchivo(direccion);
 	archivo->set_nombreArchivo_bcUsuario(nombre_usuario + ".txt");
 	archivo->ingresarReglas_BC();
@@ -809,7 +812,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					String^ habilidad_sgte = usuario->getHabilidad();
 					int actividad_sgte = usuario->getNum_actividad();
 
-					if (usuario->getNum_actividad() == usuario->getTotal_actividades())
+					if ((usuario->getNum_actividad() == usuario->getTotal_actividades()) && (usuario->getHizo_actividad() == true))
 					{
 						//avanzo una dificultad
 						for (int i = 0; i < usuario->getDificultades().size(); i++)
@@ -826,42 +829,46 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					}
 					else
 					{
-						//Avanzo 2 actividades
-						if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) > 2)
+						if (usuario->getHizo_actividad() == true)
 						{
-							actividad_sgte = usuario->getNum_actividad() + 2;
-						}
-						//Avanzo a la dificultad sgte en actividad 1
-						else if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) < 2)
-						{
-							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							//Avanzo 2 actividades
+							if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) > 2)
 							{
-								if (usuario->getDificultad() == usuario->getDificultades()[i])
-								{
-									dificultad_sgte = usuario->getDificultades()[i + 1];
-									break;
-								}
+								actividad_sgte = usuario->getNum_actividad() + 2;
 							}
-							actividad_sgte = 1;
-						}
-						//Avanzo a la habilidad sgte en la primera dificultad y en la actividad 1
-						else
-						{
-							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							//Avanzo a la dificultad sgte en actividad 1
+							else if ((usuario->getNum_actividad() - usuario->getTotal_actividades()) < 2)
 							{
-								if (usuario->getDificultad() == usuario->getDificultades()[i])
+								for (int i = 0; i < usuario->getDificultades().size(); i++)
 								{
-									dificultad_sgte = usuario->getDificultades()[i + 1];
-									break;
+									if (usuario->getDificultad() == usuario->getDificultades()[i])
+									{
+										dificultad_sgte = usuario->getDificultades()[i + 1];
+										break;
+									}
 								}
+								actividad_sgte = 1;
 							}
-							dificultad_sgte = usuario->getDificultades()[0];
-							actividad_sgte = 1;
+							//Avanzo a la habilidad sgte en la primera dificultad y en la actividad 1
+							else
+							{
+								for (int i = 0; i < usuario->getDificultades().size(); i++)
+								{
+									if (usuario->getDificultad() == usuario->getDificultades()[i])
+									{
+										dificultad_sgte = usuario->getDificultades()[i + 1];
+										break;
+									}
+								}
+								dificultad_sgte = usuario->getDificultades()[0];
+								actividad_sgte = 1;
+							}
 						}
 					}
 
 					usuario->setDificultad(dificultad_sgte);
 					usuario->setNumero_actividad(actividad_sgte);
+					usuario->setHizo_actividad(false);
 
 					percepciones->setHabilidad(usuario->getHabilidad());
 					percepciones->setDificultad(dificultad_sgte);
@@ -883,12 +890,13 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 				{
 
 					int actividad_sgte = usuario->getNum_actividad();
-					if (usuario->getNum_actividad() != usuario->getTotal_actividades())
+					if ((usuario->getNum_actividad() != usuario->getTotal_actividades()) && (usuario->getHizo_actividad() == true))
 					{
 						actividad_sgte += 1;
 					}
 
 					usuario->setNumero_actividad(actividad_sgte);
+					usuario->setHizo_actividad(false);
 
 					percepciones->setHabilidad(usuario->getHabilidad());
 					percepciones->setDificultad(usuario->getDificultad());
@@ -912,7 +920,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					String^ dificultad_sgte = usuario->getDificultad();
 					String^ habilidad_stge = usuario->getHabilidad();
 
-					if (usuario->getNum_actividad() == 1)
+					if ((usuario->getNum_actividad() == 1) && (usuario->getHizo_actividad() == true))
 					{
 						if (usuario->getDificultad() == usuario->getDificultades()[0]) {
 							if (usuario->getHabilidad() != usuario->getHabilidades()[0])
@@ -938,12 +946,17 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					}
 					else //retrocede una actividad
 					{
-						actividad_sgte = usuario->getNum_actividad() - 1;
+						if (usuario->getHizo_actividad() == true)
+						{
+							actividad_sgte = usuario->getNum_actividad() - 1;
+						}
+
 					}
 
 					usuario->setNumero_actividad(actividad_sgte);
 					usuario->setHabilidad(dificultad_sgte);
 					usuario->setDificultad(habilidad_stge);
+					usuario->setHizo_actividad(false);
 
 					percepciones->setHabilidad(habilidad_stge);
 					percepciones->setDificultad(dificultad_sgte);
@@ -1122,14 +1135,22 @@ String^ AgenteControlador::obtenerNivelLogro()
 
 void AgenteControlador::evaluarActividad(String^ _habilidad, String^ _dificultad, int _actividad, vector<String^> _respuestas)
 {
-	evaluador = gcnew Evaluador("Pauta.txt");
+	evaluador = gcnew Evaluador("Pauta.txt", limite_inf, limite_med, limite_sup);
 	evaluador->revisar_actividad(_habilidad, _dificultad, _actividad, _respuestas);
 	percepciones->setNivelDeLogro(evaluador->getNivel_de_logro());
 }
 
 void AgenteControlador::determinarNivelDeActuacion()
 {
-	AgenteAprendizaje^ aprendizaje = gcnew AgenteAprendizaje(conector, percepciones);
+	AgenteAprendizaje^ aprendizaje;
+	if (this->factores != nullptr)
+	{
+		aprendizaje = gcnew AgenteAprendizaje(this->conector, this->percepciones, this->factores);
+	}
+	else
+	{
+		aprendizaje = gcnew AgenteAprendizaje(this->conector, this->percepciones);
+	}
 	aprendizaje->determinarElementoActuacion();
 	if (percepciones->getProblemaGenerado() == nullptr)
 	{
@@ -1156,4 +1177,14 @@ String ^ AgenteControlador::getProblema()
 Percepciones^ AgenteControlador::getPercepciones()
 {
 	return this->percepciones;
+}
+
+ConjuntoFactores ^ AgenteControlador::getFactores()
+{
+	return this->factores;
+}
+
+void AgenteControlador::setFactores(ConjuntoFactores ^ _factores)
+{
+	this->factores = _factores;
 }

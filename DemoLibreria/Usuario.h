@@ -24,7 +24,7 @@ public:
 	String^ getProblema();
 	String^ getNivel_actuacion();
 	int getTotal_actividades();
-	bool getPaso_actividad();
+	bool getHizo_actividad();
 	vector<String^> getHabilidades();
 	vector<String^> getDificultades();
 	vector<String^> getHistorialNivelActuacion();
@@ -38,7 +38,7 @@ public:
 	void setHabilidades(vector<String^> _habilidades);
 	void setDificultades(vector<String^> _dificultades);
 	void setHabilidades(String^ habilidad);
-	void setPaso_actividad(bool _aprobacion);
+	void setHizo_actividad(bool _aprobacion);
 	void setTotalActividades(int _totalAct);
 	void setHistorialNivelActuacion(vector<String^> _historial);
 private:

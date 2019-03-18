@@ -33,7 +33,6 @@ public:
 #pragma region Override
 	bool operator == (Regla ^r2);
 	bool operator != (Regla ^r2);
-	bool Equals(Regla ^r1);
 	Regla% operator=(const Regla% r);
 #pragma endregion
 
