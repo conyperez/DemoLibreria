@@ -79,7 +79,7 @@ System::Void DemoLibreria::Inicio::btnComenzar_Click(System::Object^  sender, Sy
 	this->usuario->setReglaNivActuacion(gcnew Regla(gcnew Hecho("nivelActuacion", gcnew Argumento("Alto"), VERDADERO), cuerpo_nivelActuacion));
 	this->usuario->setHizo_actividad(true);
 
-	this->controlador = gcnew AgenteControlador(usuario, "Base_de_conocimiento/Base_de_Conocimiento.txt", "Usuario");
+	this->controlador = gcnew AgenteControlador(usuario, "Base_de_conocimiento/Base_de_Conocimiento.txt", "Usuario",29,69,100);
 
 
 	gcnew Etapas(this, usuario, controlador);

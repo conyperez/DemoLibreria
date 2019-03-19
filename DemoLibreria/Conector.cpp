@@ -39,10 +39,6 @@ void Conector::borrarHechos()
 	this->hechos->borrarHechos();
 }
 
-bool Conector::getLeyendoRegla()
-{
-	return this->leyendoRegla;
-}
 
 void Conector::inicioRegla()
 {
@@ -85,7 +81,6 @@ Regla ^ Conector::transformarString_A_Regla(String ^ regla)
 	String^ consecuenteCabeza = cabeza->Split('(', ')')[1];
 
 	Hecho^ hechoCabeza = gcnew Hecho(antecedenteCabeza, gcnew Argumento(consecuenteCabeza));
-	hechoCabeza->setPermanente(true);
 
 	array<String^>^ separar_cuerpo = cuerpo->Split(',');
 
@@ -106,7 +101,6 @@ Regla ^ Conector::transformarString_A_Regla(String ^ regla)
 		else
 		{
 			Hecho^ hechoCuerpo = gcnew Hecho(antecedenteCuerpo, gcnew Argumento(consecuenteCuerpo));
-			hechoCuerpo->setPermanente(true);
 
 			vectHechosCuerpo.push_back(hechoCuerpo);
 		}
@@ -125,13 +119,6 @@ BaseDeHechos ^ Conector::obtenerBaseDeHechos()
 {
 	return this->hechos;
 }
-
-void Conector::cerrarArchivo()
-{
-	this->reglas = gcnew BaseDeConocimiento();
-	this->hechos = gcnew BaseDeHechos();
-}
-
 String ^ Conector::pasarRegla_A_String(Regla ^ regla)
 {
 

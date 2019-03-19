@@ -1,9 +1,12 @@
 #include "AgenteControlador.h"
 
-AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo, String^ nombre_usuario)
+AgenteControlador::AgenteControlador(Usuario ^ _usuario, String ^ _nombreArchivo, String^ nombre_usuario, int limit_inf, int limit_med, int limit_sup)
 {
 	usuario = _usuario;
 	direccion = _nombreArchivo;
+	this->limite_inf = limit_inf;
+	this->limite_med = limit_med;
+	this->limite_sup = limit_sup;
 	archivo = gcnew LeerArchivo(direccion);
 	archivo->set_nombreArchivo_bcUsuario(nombre_usuario + ".txt");
 	archivo->ingresarReglas_BC();
@@ -943,11 +946,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					}
 					else //retrocede una actividad
 					{
-						if (usuario->getHizo_actividad() == true)
-						{
-							actividad_sgte = usuario->getNum_actividad() - 1;
-						}
-						
+						actividad_sgte = usuario->getNum_actividad() - 1;
 					}
 
 					usuario->setNumero_actividad(actividad_sgte);
@@ -1132,14 +1131,22 @@ String^ AgenteControlador::obtenerNivelLogro()
 
 void AgenteControlador::evaluarActividad(String^ _habilidad, String^ _dificultad, int _actividad, vector<String^> _respuestas)
 {
-	evaluador = gcnew Evaluador("Pauta.txt");
+	evaluador = gcnew Evaluador("Pauta.txt", limite_inf, limite_med, limite_sup);
 	evaluador->revisar_actividad(_habilidad, _dificultad, _actividad, _respuestas);
 	percepciones->setNivelDeLogro(evaluador->getNivel_de_logro());
 }
 
 void AgenteControlador::determinarNivelDeActuacion()
 {
-	AgenteAprendizaje^ aprendizaje = gcnew AgenteAprendizaje(conector, percepciones);
+	AgenteAprendizaje^ aprendizaje;
+	if (this->factores != nullptr)
+	{
+		aprendizaje = gcnew AgenteAprendizaje(this->conector, this->percepciones, this->factores);
+	}
+	else
+	{
+		aprendizaje = gcnew AgenteAprendizaje(this->conector, this->percepciones);
+	}
 	aprendizaje->determinarElementoActuacion();
 	if (percepciones->getProblemaGenerado() == nullptr)
 	{
@@ -1166,4 +1173,14 @@ String ^ AgenteControlador::getProblema()
 Percepciones^ AgenteControlador::getPercepciones()
 {
 	return this->percepciones;
+}
+
+ConjuntoFactores ^ AgenteControlador::getFactores()
+{
+	return this->factores;
+}
+
+void AgenteControlador::setFactores(ConjuntoFactores ^ _factores)
+{
+	this->factores = _factores;
 }

@@ -1,8 +1,11 @@
 #include "Evaluador.h"
 
-Evaluador::Evaluador(String ^ _direccion_pauta)
+Evaluador::Evaluador(String ^ _direccion_pauta, int limit_inf, int limit_med, int limit_sup)
 {
 	this->direccion_pauta = _direccion_pauta;
+	this->limite_inf = limit_inf;
+	this->limite_med = limit_med;
+	this->limite_sup = limit_sup;
 }
 
 Evaluador::~Evaluador()
@@ -103,15 +106,15 @@ void Evaluador::leerPauta()
 void Evaluador::obtenerNiveldeLogro()
 {
 	this->porcentaje_logro = ((contBuenas * 100) / (contBuenas + contMalas));
-	if ((porcentaje_logro >= 0) && (porcentaje_logro <= 29))
+	if ((porcentaje_logro >= 0) && (porcentaje_logro <= this->limite_inf))
 	{
 		this->nivel_de_logro = "No_Logrado";
 	}
-	else if ((porcentaje_logro > 29) && (porcentaje_logro <= 69))
+	else if ((porcentaje_logro > this->limite_inf) && (porcentaje_logro <= this->limite_med))
 	{
 		this->nivel_de_logro = "Medianamente_Logrado";
 	}
-	else if ((porcentaje_logro > 69) && (porcentaje_logro <= 100))
+	else if ((porcentaje_logro > this->limite_med) && (porcentaje_logro <= this->limite_sup))
 	{
 		this->nivel_de_logro = "Logrado";
 	}

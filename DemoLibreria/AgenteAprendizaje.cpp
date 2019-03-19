@@ -6,6 +6,13 @@ AgenteAprendizaje::AgenteAprendizaje(Conector ^ conector, Percepciones ^ percepc
 	this->percepciones = percepciones;
 }
 
+AgenteAprendizaje::AgenteAprendizaje(Conector ^ conector, Percepciones ^ percepciones, ConjuntoFactores ^ _factores)
+{
+	this->conector = conector;
+	this->percepciones = percepciones;
+	this->factores = _factores;
+}
+
 AgenteAprendizaje::~AgenteAprendizaje()
 {
 	delete conector;
@@ -74,6 +81,41 @@ void AgenteAprendizaje::obtenerNivelActuacionDificultad()
 	String ^ nivelActuacion = conector->ejecutarMotorInferencia("nivelActuacion", 1);
 	reglaNivelActuacion = conector->obtenerMotorDeInferencia()->getReglaInferida();
 	percepciones->setNivelDeActuacion(nivelActuacion);
+}
+
+void AgenteAprendizaje::obtenerNivelActuacionConFactores()
+{
+	// Determina los valores obtenidos por cada factor
+	ArrayList ^ valores = gcnew ArrayList();
+	for (int i = 0; i < factores->getFactores()->Count; i++)
+	{
+		conector->agregarHecho(gcnew Hecho("factor", gcnew Argumento(factores->obtenerFactor(i)->getNombre()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("nivel", gcnew Argumento(factores->obtenerFactor(i)->getNivelObtenido()), VERDADERO));
+		valores->Add(conector->ejecutarMotorInferencia("valor" + factores->obtenerFactor(i)->getNombre(), 1));
+	}
+
+	// Se calcula porcentaje de actuacion
+	for (int i = 0; i < valores->Count; i++)
+	{
+		double valor = System::Convert::ToDouble(valores[i]);
+		porcentajeActuacion += (valor * factores->obtenerFactor(i)->getPeso());
+	}
+
+	// Obtener nivel de actuacion
+	if (porcentajeActuacion < this->minimoActuacion) {
+		conector->agregarHecho(gcnew Hecho("rangoActuacion", gcnew Argumento("0-" + this->minimoActuacion), VERDADERO));
+	}
+	else if (porcentajeActuacion >= this->minimoActuacion && porcentajeActuacion < this->maximoActuacion) {
+		conector->agregarHecho(gcnew Hecho("rangoActuacion", gcnew Argumento(this->minimoActuacion + "-" + this->maximoActuacion), VERDADERO));
+	}
+	else if (porcentajeActuacion >= this->maximoActuacion) {
+		conector->agregarHecho(gcnew Hecho("rangoActuacion", gcnew Argumento(this->maximoActuacion + "-100"), VERDADERO));
+	}
+
+	String ^ nivelActuacion = conector->ejecutarMotorInferencia("nivelActuacion", 1);
+	reglaNivelActuacion = conector->obtenerMotorDeInferencia()->getReglaInferida();
+	percepciones->setNivelDeActuacion(nivelActuacion);
+
 }
 
 int AgenteAprendizaje::obtenerCritica()
@@ -150,13 +192,24 @@ int AgenteAprendizaje::obtenerCritica()
 
 Regla^ AgenteAprendizaje::obtenerProblema()
 {
-	conector->agregarHecho(gcnew Hecho("totalActuacion", gcnew Argumento(percepciones->getTotalActuacion()), VERDADERO));
-	conector->agregarHecho(gcnew Hecho("contadorAlto", gcnew Argumento(percepciones->getContadorAlto().ToString()), VERDADERO));
-	conector->agregarHecho(gcnew Hecho("contadorMedio", gcnew Argumento(percepciones->getContadorMedio().ToString()), VERDADERO));
-	conector->agregarHecho(gcnew Hecho("contadorBajo", gcnew Argumento(percepciones->getContadorBajo().ToString()), VERDADERO));
-	String ^ argumentoProblema = conector->ejecutarMotorInferencia("generarProblema", 0);
-	Regla ^ problema = conector->obtenerMotorDeInferencia()->getReglaInferida();
-
+	Regla ^ problema = gcnew Regla();
+	String ^ argumentoProblema;
+	if (percepciones->getContadorAlto() == 0 && percepciones->getContadorMedio() == 0 && percepciones->getContadorBajo() == 0)
+	{
+		conector->agregarHecho(gcnew Hecho("nivelActuacion", gcnew Argumento(this->reglaNivelActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("nivelActuacionAnterior", gcnew Argumento(this->totalActuacionAnterior), VERDADERO));
+		argumentoProblema = conector->ejecutarMotorInferencia("generarProblema", 0);
+		problema = conector->obtenerMotorDeInferencia()->getReglaInferida();
+	}
+	else
+	{
+		conector->agregarHecho(gcnew Hecho("totalActuacion", gcnew Argumento(percepciones->getTotalActuacion()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("contadorAlto", gcnew Argumento(percepciones->getContadorAlto().ToString()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("contadorMedio", gcnew Argumento(percepciones->getContadorMedio().ToString()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("contadorBajo", gcnew Argumento(percepciones->getContadorBajo().ToString()), VERDADERO));
+		argumentoProblema = conector->ejecutarMotorInferencia("generarProblema", 0);
+		problema = conector->obtenerMotorDeInferencia()->getReglaInferida();
+	}
 	return problema;
 }
 
@@ -182,7 +235,11 @@ void AgenteAprendizaje::realimentarElementoAprendizaje()
 
 void AgenteAprendizaje::determinarElementoActuacion()
 {
-	if (percepciones->getDificultad() != nullptr)
+	if (this->factores != nullptr)
+	{
+		obtenerNivelActuacionConFactores();
+	}
+	else if (percepciones->getDificultad() != nullptr)
 	{
 		obtenerNivelActuacionDificultad();
 	}
@@ -198,10 +255,18 @@ void AgenteAprendizaje::determinarElementoActuacion()
 	}
 	else if (critica == 1)				// Hay critica
 	{
-		realimentarElementoAprendizaje();
-		percepciones->setProblemaGenerado(nullptr);
+		if (percepciones->getProblemaGenerado() != nullptr)
+		{
+			realimentarElementoAprendizaje();
+			percepciones->setProblemaGenerado(nullptr);
+		}
+		else
+		{
+			critica = 2;
+		}
 	}
-	else if (critica == 2)				// No hay critica
+
+	if (critica == 2)				// No hay critica
 	{
 		determinarProgresoMedio();
 		Regla ^ problema = obtenerProblema();
@@ -236,6 +301,31 @@ void AgenteAprendizaje::determinarProgresoMedio()
 Regla ^ AgenteAprendizaje::getActuacionObtenida()
 {
 	return reglaNivelActuacion;
+}
+
+double AgenteAprendizaje::getMinimoActuacion()
+{
+	return this->minimoActuacion;
+}
+
+double AgenteAprendizaje::getMaximoActuacion()
+{
+	return this->maximoActuacion;
+}
+
+void AgenteAprendizaje::setMinimoActuacion(double _minimoActuacion)
+{
+	this->minimoActuacion = _minimoActuacion;
+}
+
+void AgenteAprendizaje::setMaximoActuacion(double _maximoActuacion)
+{
+	this->maximoActuacion = _maximoActuacion;
+}
+
+void AgenteAprendizaje::setPorcentajeActuacion(double _porcentajeActuacion)
+{
+	this->porcentajeActuacion = _porcentajeActuacion;
 }
 
 /*

@@ -70,11 +70,3 @@ bool Argumento::operator!=(Argumento ^ arg)
 	return true;
 }
 
-bool Argumento::Equals(Argumento ^ arg)
-{
-	if (this == arg)
-	{
-		return true;
-	}
-	return false;
-}
