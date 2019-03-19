@@ -919,8 +919,8 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					}
 
 					usuario->setNumero_actividad(actividad_sgte);
-					usuario->setHabilidad(dificultad_sgte);
-					usuario->setDificultad(habilidad_stge);
+					usuario->setHabilidad(habilidad_stge);
+					usuario->setDificultad(dificultad_sgte);
 					usuario->setHizo_actividad(false);
 
 					percepciones->setHabilidad(habilidad_stge);
@@ -1087,18 +1087,33 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 						if (dificultad_asignada == usuario->getDificultades()[0])
 						{
 							//si se encuentra en la primera habilidad
-							if (habilidad_asignada == usuario->getHabilidades()[0])
-							{
-
-							}
-							else
+							if (habilidad_asignada != usuario->getHabilidades()[0])
 							{
 								//disminuye la habilidad
+								for (int i = 0; i < usuario->getHabilidades().size(); i++)
+								{
+									if (habilidad_asignada == usuario->getHabilidades()[i])
+									{
+										habilidad_asignada = usuario->getHabilidades()[i - 1];
+										break;
+									}
+								}
+								dificultad_asignada = usuario->getDificultades()[usuario->getHabilidades().size() - 1];
+								actividad_asignada = usuario->getTotal_actividades().ToString();
 							}
 						}
 						else
 						{
 							//disminuye una dificultad
+							for (int i = 0; i < usuario->getDificultades().size(); i++)
+							{
+								if (dificultad_asignada == usuario->getDificultades()[i])
+								{
+									dificultad_asignada = usuario->getDificultades()[i - 1];
+									break;
+								}
+							}
+							actividad_asignada = usuario->getTotal_actividades().ToString();
 						}
 					}
 					else
@@ -1108,12 +1123,83 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 				}
 				else if (tmpRegla == "Retrocede_Dos")
 				{
-
+				if ((Convert::ToInt32(actividad_asignada) - 2) > 0)
+				{
+					actividad_asignada = (Convert::ToInt32(actividad_asignada) - 2).ToString();
+				}
+				else if ((Convert::ToInt32(actividad_asignada) - 2) == 0)
+				{
+					//si esta en la primera dificultad
+					if (dificultad_asignada == usuario->getDificultades()[0])
+					{
+						//si esta en la primera habilidad
+						if (habilidad_asignada != usuario->getHabilidades()[0])
+						{
+							//retrocedo una habilidad
+							for (int i = 0; i < usuario->getHabilidades().size(); i++)
+							{
+								if (habilidad_asignada == usuario->getHabilidades()[i])
+								{
+									habilidad_asignada = usuario->getHabilidades()[i - 1];
+									break;
+								}
+							}
+							dificultad_asignada = usuario->getDificultades()[usuario->getDificultades().size() - 1];
+							actividad_asignada = usuario->getTotal_actividades().ToString();
+						}
+					}
+					else
+					{
+						//busco la dificultad sgte
+						for (int i = 0; i < usuario->getDificultades().size(); i++)
+						{
+							if (dificultad_asignada == usuario->getDificultades()[i])
+							{
+								dificultad_asignada = usuario->getDificultades()[i - 1];
+							}
+						}
+						actividad_asignada = usuario->getTotal_actividades().ToString();
+					}
+				}
+				else if ((Convert::ToInt32(actividad_asignada) - 2) < 0)
+				{
+					//si esta en la primera dificultad
+					if (dificultad_asignada == usuario->getDificultades()[0])
+					{
+						//si esta en la primera habilidad
+						if (habilidad_asignada != usuario->getHabilidades()[0])
+						{
+							//retrocedo una habilidad
+							for (int i = 0; i < usuario->getHabilidades().size(); i++)
+							{
+								if (habilidad_asignada == usuario->getHabilidades()[i])
+								{
+									habilidad_asignada = usuario->getHabilidades()[i - 1];
+									break;
+								}
+							}
+							dificultad_asignada = usuario->getDificultades()[usuario->getDificultades().size() - 1];
+							actividad_asignada = (usuario->getTotal_actividades() - 1).ToString();
+						}
+					}
+					else
+					{
+						//busco la dificultad sgte
+						for (int i = 0; i < usuario->getDificultades().size(); i++)
+						{
+							if (dificultad_asignada == usuario->getDificultades()[i])
+							{
+								dificultad_asignada = usuario->getDificultades()[i - 1];
+							}
+						}
+						actividad_asignada = (usuario->getTotal_actividades() - 1).ToString();
+					}
+				}
 				}
 
 				usuario->setNumero_actividad(Convert::ToInt32(actividad_asignada));
-				usuario->setHabilidad(dificultad_asignada);
-				usuario->setDificultad(habilidad_asignada);
+				usuario->setHabilidad(habilidad_asignada);
+				usuario->setDificultad(dificultad_asignada);
 				usuario->setHizo_actividad(false);
 
 				percepciones->setHabilidad(habilidad_asignada);
