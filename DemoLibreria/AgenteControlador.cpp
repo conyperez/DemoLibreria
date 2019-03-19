@@ -719,7 +719,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 
 		if (motorInferencia->getTerminoInferencia())
 		{
-			if (usuario->getProblema() == nullptr) //solo nivel de actuacion por lo que no existe critica
+			if (percepciones->getProblemaGenerado() == nullptr) //solo nivel de actuacion por lo que no existe critica
 			{
 				String^ habilidad;
 

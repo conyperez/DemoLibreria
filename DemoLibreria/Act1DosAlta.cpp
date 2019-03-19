@@ -47,7 +47,7 @@ System::Void DemoLibreria::Act1DosAlta::btnListo_Click(System::Object^  sender, 
 	vectRespuestas.push_back(Convert::ToString(this->posicionBtnTres));
 	vectRespuestas.push_back(Convert::ToString(this->posicionBtnCuatro));
 
-	controlador->evaluarActividad("Habilidad_Uno", "Alto", 2, vectRespuestas);
+	controlador->evaluarActividad("Habilidad_Uno", "Dificil", 2, vectRespuestas);
 
 	MessageBox::Show("Nivel de Logro: " + controlador->obtenerNivelLogro());
 

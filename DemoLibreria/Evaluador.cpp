@@ -189,6 +189,9 @@ void Evaluador::revisar_act_conHab_y_Dif(String^ _habilidad, String^ _dificultad
 	while (contador < this->componentes_pauta->Length)
 	{
 		//Comparo las componentes
+		String ^ hab = _habilidad;
+		String ^ dif = _dificultad;
+		String ^ act = actividad.ToString();
 		if (_habilidad == this->componentes_pauta[contador][0]->ToString() &&
 			_dificultad == this->componentes_pauta[contador][1]->ToString() &&
 			actividad == Int32::Parse(this->componentes_pauta[contador][2]->ToString()))

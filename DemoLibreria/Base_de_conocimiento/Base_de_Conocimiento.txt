@@ -51,7 +51,7 @@ generarProblema(Avanza_Tres):totalActuacion(Alto),contadorAlto(2),contadorMedio(
 generarProblema(Retrocede_Dos):totalActuacion(Bajo),contadorAlto(0),contadorMedio(0),contadorBajo(1),peso(50)
 generarProblema(Retrocede_Tres):totalActuacion(Bajo),contadorAlto(0),contadorMedio(0),contadorBajo(2),peso(50)
 generarProblema(Mantiene):totalActuacion(Medio),contadorAlto(0),contadorMedio(1),contadorBajo(0),peso(50)
-generarProblema(Aumenta_Uno):totalActuacion(Medio_Alto),contadorAlto(0),contadorMedio(2),contadorBajo(0),peso(50)
+generarProblema(Avanza_Uno):totalActuacion(Medio_Alto),contadorAlto(0),contadorMedio(2),contadorBajo(0),peso(50)
 generarProblema(Retrocede_Uno):totalActuacion(Medio_Bajo),contadorAlto(0),contadorMedio(2),contadorBajo(0),peso(50)
 generarCritica(True):progreso(True),peso(50)
 generarCritica(True):progreso(False),peso(50)
