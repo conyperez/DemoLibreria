@@ -946,6 +946,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i + 1];
+								break;
 							}
 						}
 						actividad_asignada = "1";
@@ -995,6 +996,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i + 1];
+								break;
 							}
 						}
 						actividad_asignada = "1";
@@ -1079,6 +1081,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i + 1];
+								break;
 							}
 						}
 						actividad_asignada = "1";
@@ -1240,6 +1243,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i - 1];
+								break;
 							}
 						}
 						actividad_asignada = usuario->getTotal_actividades().ToString();
@@ -1274,6 +1278,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i - 1];
+								break;
 							}
 						}
 						actividad_asignada = (usuario->getTotal_actividades() - 1).ToString();
@@ -1315,6 +1320,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i - 1];
+								break;
 							}
 						}
 						actividad_asignada = usuario->getTotal_actividades().ToString();
@@ -1349,6 +1355,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 							if (dificultad_asignada == usuario->getDificultades()[i])
 							{
 								dificultad_asignada = usuario->getDificultades()[i - 1];
+								break;
 							}
 						}
 						actividad_asignada = (usuario->getTotal_actividades() - 3).ToString();
