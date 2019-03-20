@@ -54,7 +54,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 		conector->agregarHecho(gcnew Hecho(reglaNivActuacion->getCabeza()->getRelacion(), gcnew Argumento(reglaNivActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
 		conector->agregarHecho(gcnew Hecho("peso", gcnew Argumento("50"), VERDADERO));
 
-		String^ resultado = conector->ejecutarMotorInferencia(meta,1);
+		String^ resultado = conector->ejecutarMotorInferencia(meta, 1);
 
 		if (motorInferencia->getTerminoInferencia())
 		{
@@ -376,7 +376,7 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 		conector->agregarHecho(gcnew Hecho("actividad", gcnew Argumento(usuario->getNum_actividad().ToString()), VERDADERO));
 
 
-		String^ resultado = conector->ejecutarMotorInferencia(meta,0);
+		String^ resultado = conector->ejecutarMotorInferencia(meta, 0);
 
 		if (motorInferencia->getTerminoInferencia())
 		{
@@ -919,18 +919,18 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					if (dificultad_asignada == usuario->getDificultades()[usuario->getDificultades().size() - 1])
 					{
 						//si esta en la ultima habilidad
-						if (habilidad_asignada == usuario->getHabilidades()[usuario->getHabilidades().size() -1 ])
+						if (habilidad_asignada == usuario->getHabilidades()[usuario->getHabilidades().size() - 1])
 						{
 							habilidad_asignada = "FIN";
 						}
 						else
 						{
 							//busco la habilidad sgte
-							for (int i = 0; i < usuario->getHabilidades().size();i++)
+							for (int i = 0; i < usuario->getHabilidades().size(); i++)
 							{
 								if (habilidad_asignada == usuario->getHabilidades()[i])
 								{
-									habilidad_asignada = usuario->getHabilidades()[i+1];
+									habilidad_asignada = usuario->getHabilidades()[i + 1];
 									break;
 								}
 							}
@@ -1048,7 +1048,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 				{
 					actividad_asignada = (Convert::ToInt32(actividad_asignada) + 3).ToString();
 				}
-				else if((usuario->getTotal_actividades() - (Convert::ToInt32(actividad_asignada) + 3)) ==  -1)
+				else if ((usuario->getTotal_actividades() - (Convert::ToInt32(actividad_asignada) + 3)) == -1)
 				{
 					//si esta en la ultima dificultad
 					if (dificultad_asignada == usuario->getDificultades()[usuario->getDificultades().size() - 1])
@@ -1087,7 +1087,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 						actividad_asignada = "1";
 					}
 				}
-				else if((usuario->getTotal_actividades() - (Convert::ToInt32(actividad_asignada) + 3)) == -2)
+				else if ((usuario->getTotal_actividades() - (Convert::ToInt32(actividad_asignada) + 3)) == -2)
 				{
 					//si esta en la ultima dificultad
 					if (dificultad_asignada == usuario->getDificultades()[usuario->getDificultades().size() - 1])
@@ -1285,7 +1285,7 @@ vector<String^> AgenteControlador::determinarActividadDificultadHabilidad(String
 					}
 				}
 			}
-			if(tmpRegla == "Retrocede_Tres")
+			if (tmpRegla == "Retrocede_Tres")
 			{
 				if ((Convert::ToInt32(actividad_asignada) - 3) > 0)
 				{
@@ -1400,7 +1400,6 @@ void AgenteControlador::evaluarActividad(String^ _habilidad, String^ _dificultad
 
 void AgenteControlador::determinarNivelDeActuacion()
 {
-	AgenteAprendizaje^ aprendizaje;
 	if (this->factores != nullptr)
 	{
 		aprendizaje = gcnew AgenteAprendizaje(this->conector, this->percepciones, this->factores);
@@ -1446,4 +1445,14 @@ ConjuntoFactores ^ AgenteControlador::getFactores()
 void AgenteControlador::setFactores(ConjuntoFactores ^ _factores)
 {
 	this->factores = _factores;
+}
+
+void AgenteControlador::setAprendizaje(AgenteAprendizaje ^ _aprendizaje)
+{
+	this->aprendizaje = _aprendizaje;
+}
+
+AgenteAprendizaje ^ AgenteControlador::getAprendizaje()
+{
+	return this->aprendizaje;
 }
