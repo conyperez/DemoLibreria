@@ -44,9 +44,6 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 		String^ tmpRegla = usuario->getNivel_actuacion();
 		Regla^ reglaNivActuacion = conector->transformarString_A_Regla(tmpRegla);
 
-		BaseDeHechos^ baseHechos = conector->obtenerBaseDeHechos();
-		BaseDeConocimiento^ baseConocimiento = conector->obtenerBaseDeConocimiento();
-
 		/*
 		La regla deberia ser por ejemplo:
 			generarProblema(Avanza): nivelActuacion(...), peso(...)
@@ -54,12 +51,10 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 			generarProblema("Habilidad"_"numActividad"): habilidad(...),actividad(...)
 		*/
 
-		baseHechos->agregarHechos(gcnew Hecho(reglaNivActuacion->getCabeza()->getRelacion(), gcnew Argumento(reglaNivActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
-		baseHechos->agregarHechos(gcnew Hecho("peso", gcnew Argumento("50"), VERDADERO));
+		conector->agregarHecho(gcnew Hecho(reglaNivActuacion->getCabeza()->getRelacion(), gcnew Argumento(reglaNivActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("peso", gcnew Argumento("50"), VERDADERO));
 
-		motorInferencia = gcnew MotorDeInferencia(baseHechos, baseConocimiento);
-
-		Hecho^ resultado = motorInferencia->ejecutar(meta, ENCADENAMIENTO_ADELANTE);
+		String^ resultado = conector->ejecutarMotorInferencia(meta,1);
 
 		if (motorInferencia->getTerminoInferencia())
 		{
@@ -68,7 +63,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 			{
 				String^ habilidad;
 				String^ actividad_asignada;
-				if (resultado->getArgumento()->getNombreArgumento() == "Avanza")
+				if (resultado == "Avanza")
 				{
 					//Si esta en la ultima actividad y ultima habilidad
 					//Si esta en la ultima actividad pero no en la ultima habilidad
@@ -123,7 +118,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 						}
 					}
 				}
-				else if (resultado->getArgumento()->getNombreArgumento() == "Mantiene")
+				else if (resultado == "Mantiene")
 				{
 					if (usuario->getTotal_actividades() == 1 || usuario->getNum_actividad() == 1)
 					{
@@ -149,7 +144,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 					return actividad;
 
 				}
-				else if (resultado->getArgumento()->getNombreArgumento() == "Retrocede")
+				else if (resultado == "Retrocede")
 				{
 					//Si esta en la primera habilidad 
 					if (usuario->getHabilidad() == usuario->getHabilidades()[0])
@@ -257,15 +252,13 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 
 							conector->borrarHechos();
 
-							delete baseHechos;
-							delete baseConocimiento;
 							delete motorInferencia;
 
 							return actividad;
 						}
 					}
 				}
-				else if (reglaProblema->getCabeza()->getArgumento()->getNombreArgumento() == "Siguiente_Habilidad")
+				else if (resultado == "Siguiente_Habilidad")
 				{
 					if (usuario->getHistorialNivelActuacion().size() == 0)
 					{
@@ -318,8 +311,6 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 
 							conector->borrarHechos();
 
-							delete baseHechos;
-							delete baseConocimiento;
 							delete motorInferencia;
 
 							return actividad;
@@ -328,7 +319,7 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 				}
 				else
 				{
-					array<String^>^ separar_componentes = resultado->getArgumento()->getNombreArgumento()->Split('_');
+					array<String^>^ separar_componentes = resultado->Split('_');
 
 					String^ hab = separar_componentes[0];
 					String^ act = separar_componentes[1];
@@ -342,8 +333,6 @@ vector<String^> AgenteControlador::determinarActividadConHabilidad(String ^ meta
 					conector->borrarHechos();
 
 					delete motorInferencia;
-					delete baseConocimiento;
-					delete baseHechos;
 
 					return actividad;
 				}
@@ -376,9 +365,6 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 		String^ tmpRegla = usuario->getNivel_actuacion();
 		Regla^ reglaNivActuacion = conector->transformarString_A_Regla(tmpRegla);
 
-		BaseDeHechos^ baseHechos = conector->obtenerBaseDeHechos();
-		BaseDeConocimiento^ baseConocimiento = conector->obtenerBaseDeConocimiento();
-
 		/*
 		La regla deberia ser por ejemplo:
 			generarProblema(Siguiente_Dificultad): dificultad(...),actividad(..)
@@ -386,12 +372,11 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 			generarProblema("Dificultad"_"numActividad"): dificultad(...),actividad(...)
 		*/
 
-		baseHechos->agregarHechos(gcnew Hecho(reglaNivActuacion->getCabeza()->getRelacion(), gcnew Argumento(reglaNivActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
-		baseHechos->agregarHechos(gcnew Hecho("actividad", gcnew Argumento(usuario->getNum_actividad().ToString()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho(reglaNivActuacion->getCabeza()->getRelacion(), gcnew Argumento(reglaNivActuacion->getCabeza()->getArgumento()->getNombreArgumento()), VERDADERO));
+		conector->agregarHecho(gcnew Hecho("actividad", gcnew Argumento(usuario->getNum_actividad().ToString()), VERDADERO));
 
-		motorInferencia = gcnew MotorDeInferencia(baseHechos, baseConocimiento);
 
-		Hecho^ resultado = motorInferencia->ejecutar(meta, ENCADENAMIENTO_ADELANTE);
+		String^ resultado = conector->ejecutarMotorInferencia(meta,0);
 
 		if (motorInferencia->getTerminoInferencia())
 		{
@@ -400,7 +385,7 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 			{
 				String^ dificultad;
 				String^ actividad_asignada;
-				if (resultado->getArgumento()->getNombreArgumento() == "Avanza")
+				if (resultado == "Avanza")
 				{
 					//Si esta en la ultima actividad y ultima dificultad
 					//Si esta en la ultima actividad pero no en la ultima dificultad
@@ -455,7 +440,7 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 						}
 					}
 				}
-				else if (resultado->getArgumento()->getNombreArgumento() == "Mantiene")
+				else if (resultado == "Mantiene")
 				{
 					if (usuario->getTotal_actividades() == 1 || usuario->getNum_actividad() == 1)
 					{
@@ -481,7 +466,7 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 					return actividad;
 
 				}
-				else if (resultado->getArgumento()->getNombreArgumento() == "Retrocede")
+				else if (resultado == "Retrocede")
 				{
 					//Si esta en la primera dificultad 
 					if (usuario->getDificultad() == usuario->getDificultades()[0])
@@ -589,15 +574,13 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 
 							conector->borrarHechos();
 
-							delete baseHechos;
-							delete baseConocimiento;
 							delete motorInferencia;
 
 							return actividad;
 						}
 					}
 				}
-				else if (reglaProblema->getCabeza()->getArgumento()->getNombreArgumento() == "Siguiente_Dificultad")
+				else if (resultado == "Siguiente_Dificultad")
 				{
 					if (usuario->getHistorialNivelActuacion().size() == 0)
 					{
@@ -650,8 +633,6 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 
 							conector->borrarHechos();
 
-							delete baseHechos;
-							delete baseConocimiento;
 							delete motorInferencia;
 
 							return actividad;
@@ -660,7 +641,7 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 				}
 				else
 				{
-					array<String^>^ separar_componentes = resultado->getArgumento()->getNombreArgumento()->Split('_');
+					array<String^>^ separar_componentes = resultado->Split('_');
 
 					String^ hab = separar_componentes[0];
 					String^ act = separar_componentes[1];
@@ -674,8 +655,6 @@ vector<String^> AgenteControlador::determinarActividadConDificultad(String ^ met
 					conector->borrarHechos();
 
 					delete motorInferencia;
-					delete baseConocimiento;
-					delete baseHechos;
 
 					return actividad;
 				}
